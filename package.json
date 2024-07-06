@@ -48,7 +48,7 @@
     "passport-local": "1.0.0",
     "pino": "9.2.0",
     "react-router-dom": "6.24.1",
-    "superstruct": "2.0.0",
+    "superstruct": "2.0.2",
     "yaml": "2.4.5"
   }
 }
