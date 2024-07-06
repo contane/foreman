@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./routes": {
+      "types": "./dist/routes.d.ts",
+      "import": "./dist/routes.js"
+    }
+  },
+  "scripts": {
+    "build": "node -e \"fs.rmSync('./dist',{force:true,recursive:true})\" && tsc",
+    "lint": "tsc --noEmit -p tsconfig.lint.json"
+  },
+  "dependencies": {
+    "pino-pretty": "11.2.1",
+    "secure-json-parse": "2.7.0"
+  }
+}

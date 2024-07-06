@@ -1,0 +1,20 @@
+.idea
+.fleet
+node_modules/
+.DS_Store
+npm-debug.log*
+.npmrc
+.env
+
+# build folders and files
+.nyc_output
+/tmp
+/coverage
+/junit.xml
+/build
+/dist
+/backend/dist
+/frontend/dist
+
+# configuration files
+config/*.yaml
