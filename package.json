@@ -1,6 +1,6 @@
 {
   "name": "@contane/foreman",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A Kubernetes application for managing Renovate jobs.",
   "author": "Contane",
   "license": "Apache-2.0",
