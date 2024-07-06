@@ -1,0 +1,19 @@
+# Default ignored files
+.env
+.idea
+node_modules/
+renovate.json
+.github
+README.md
+.gitignore
+.gitattributes
+
+# build folders and files
+/dist
+.nyc_output
+/tmp
+/coverage
+/junit.xml
+
+# configuration
+/config
