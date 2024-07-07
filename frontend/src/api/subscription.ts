@@ -28,10 +28,14 @@ export function useApiSubscription <T extends {}, Args extends unknown[]> (
   const { url, method, body } = route.request(...args)
 
   const { fetch, reset } = fetcher
+
+  // Start with empty data and error initially, and every time the arguments change.
   useEffect(() => {
-    // This effect hook is called once initially, and then every time the arguments change.
-    // As such, we want to start with empty data and error.
     reset()
+  }, [reset, route, url, method, body])
+
+  // Subscribe to the route.
+  useEffect(() => {
     // Prevent subscriptions to non-nilpotent routes.
     if (method != null && method !== 'GET') {
       return
@@ -48,7 +52,7 @@ export function useApiSubscription <T extends {}, Args extends unknown[]> (
       abortController?.abort()
       clearInterval(interval)
     }
-  }, [fetch, reset, options.interval, route, url, method, body])
+  }, [fetch, options.interval, route, url, method, body])
 
   const loading = fetcher.data == null && fetcher.error == null
 
