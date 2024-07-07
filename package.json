@@ -14,6 +14,7 @@
   "scripts": {
     "build": "npm run build --workspaces && node -e \"fs.rmSync('./dist',{force:true,recursive:true})\" && tsc",
     "lint": "npm run lint --workspaces && tsc --noEmit -p tsconfig.lint.json && eslint --ignore-path .gitignore src",
+    "test": "npm run test --workspaces --if-present && mocha --require tsx --recursive \"test/**/*.ts\"",
     "start": "node --disable-proto=delete dist/server.js"
   },
   "repository": {
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@meyfa/eslint-config": "6.0.0",
+    "@types/mocha": "10.0.7",
     "@types/ms": "0.7.34",
     "@types/node": "20.14.10",
     "@types/passport-local": "1.0.38",
@@ -37,6 +39,8 @@
     "eslint-plugin-jsx-a11y": "6.9.0",
     "eslint-plugin-react": "7.34.3",
     "eslint-plugin-react-hooks": "4.6.2",
+    "mocha": "10.6.0",
+    "tsx": "4.16.2",
     "typescript": "5.5.3"
   },
   "dependencies": {
