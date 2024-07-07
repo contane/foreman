@@ -20,7 +20,7 @@
   },
   "scripts": {
     "build": "node -e \"fs.rmSync('./dist',{force:true,recursive:true})\" && tsc",
-    "lint": "tsc --noEmit -p tsconfig.lint.json"
+    "lint": "tsc --noEmit -p tsconfig.lint.json && eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "pino-pretty": "11.2.1",
