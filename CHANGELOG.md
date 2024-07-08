@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/contane/foreman/compare/v0.1.0...v0.1.1) (2024-07-08)
+
+
+### Bug Fixes
+
+* Avoid page flickering on pod completion ([#24](https://github.com/contane/foreman/issues/24)) ([5ca292f](https://github.com/contane/foreman/commit/5ca292fd2408b728334801f7867789f88362b670))
+
 ## 0.1.0 (2024-07-06)
 
 
