@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  publish:
     name: Build and Publish
     runs-on: ubuntu-latest
     steps:
@@ -52,3 +52,13 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker-build.outputs.digest }}
+
+      # See: https://docs.docker.com/build/ci/github-actions/update-dockerhub-desc/
+      - name: Update DockerHub description
+        uses: peter-evans/dockerhub-description@e98e4d1628a5f3be2be7c231e50981aee98723ae # v4.0.0
+        with:
+          username: contane
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          repository: contane/foreman
+          short-description: ${{ github.event.repository.description }}
+          enable-url-completion: true
