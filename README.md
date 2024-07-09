@@ -1,4 +1,4 @@
-# foreman
+# Foreman
 
 A Kubernetes application for managing Renovate jobs, developed by [Contane](https://contane.net).
 
@@ -7,17 +7,79 @@ the same or a secondary Kubernetes cluster.
 It provides a user interface for monitoring the Renovate CronJob including interactive progress and logs as well as the
 ability to trigger custom jobs, speeding up the dependency upgrade cycle in the case of many repositories.
 
-## Instructions
+## Quick Reference
 
-To build and run:
+- GitHub: https://github.com/contane/foreman
+- Docker Hub: https://hub.docker.com/r/contane/foreman
+- Helm chart: https://github.com/contane/charts/tree/main/charts/foreman
 
-```sh
-$ npm run build
-$ npm start
+## Installation
+
+We recommend deploying Foreman on Kubernetes via Helm.
+Alternatively, you can run Foreman via Docker or locally on your machine.
+
+### Prerequisites
+
+This guide assumes that you already have a Kubernetes CronJob running self-hosted Renovate.
+There are two options to set this up:
+
+- (Recommended) Use [Renovate's Helm chart](https://github.com/renovatebot/helm-charts).
+- Create a CronJob manually, following the [Renovate self-hosting examples](https://docs.renovatebot.com/examples/self-hosting/#kubernetes).
+
+### Kubernetes
+
+Please refer to the official [Helm chart](https://github.com/contane/charts/tree/main/charts/foreman) for deploying
+Foreman on Kubernetes.
+
+When deploying Foreman to the same Kubernetes cluster as Renovate, we recommend setting up separate namespaces for both
+applications and giving Foreman access to Renovate via a `Role` and `RoleBinding`.
+Foreman requires the following permissions within the Renovate namespace:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: renovate-foreman-role
+  namespace: renovate
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["cronjobs"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ```
 
-Note that you will need to authenticate on the web interface.
-During development, it is recommended to set a password for local login. See the configuration section below.
+For more information, refer to the [Kubernetes RBAC documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
+
+### Docker
+
+You can run Foreman via Docker using the following command:
+
+```sh
+docker run -p 8080:8080 -v /path/to/config:/app/config contane/foreman:latest
+```
+
+Here, `/path/to/config` is the path to the configuration directory on the host, and Foreman will be accessible on
+host port 8008.
+The configuration must include a reference to the KubeConfig file and how to find the Renovate CronJob.
+
+### Local
+
+Running Foreman locally is useful for development and testing. To do this, you need to have Node.js and NPM installed.
+After cloning the repository, run the following commands:
+
+```sh
+npm install
+npm run build
+npm start
+```
+
+Note that you will need to authenticate on the web interface. During development, it is recommended to set a password
+for local login. You will also need to have a KubeConfig file available on your machine to access the Kubernetes API.
 
 ## Configuration
 
@@ -62,7 +124,7 @@ and will allow clients to stay logged in across restarts, and less memory to be 
 `cookies.key` must be base64-encoded. To generate a key on Linux, run:
 
 ```sh
-$ npx --yes @fastify/secure-session | base64
+npx --yes @fastify/secure-session | base64
 ```
 
 Sessions are valid for 24 hours by default. You can change this by setting `cookies.maxAge` to a duration string
@@ -125,3 +187,8 @@ This will enable the following features:
 The following additional environment variables can be set:
 
 - `PORT`: The port to listen on. Defaults to `8080`.
+
+## Contributing
+
+We welcome contributions from the community! If you have suggestions, find a bug, or want to add new features, please
+open an issue or submit a pull request.
