@@ -4,12 +4,13 @@ import { api } from '../api/api.js'
 import { Heading } from '../components/Heading.js'
 import { JobPanel } from '../components/JobPanel.js'
 import { ErrorMessage } from '../components/ErrorMessage.js'
+import { Card } from '../components/Card.js'
 
 export const Jobs: FunctionComponent = () => {
   const { loading, data: jobs, error } = useApiSubscription({ interval: 5_000 }, api.jobs)
 
   return (
-    <div>
+    <>
       <Heading>
         Job History
       </Heading>
@@ -19,9 +20,9 @@ export const Jobs: FunctionComponent = () => {
         </ErrorMessage>
       )}
       {jobs != null && jobs.length === 0 && (
-        <p>
+        <Card>
           There are no previous jobs. Once a job is run, it will appear here automatically.
-        </p>
+        </Card>
       )}
       {jobs?.map((job) => (
         <JobPanel
@@ -43,6 +44,6 @@ export const Jobs: FunctionComponent = () => {
           manual={false}
         />
       ))}
-    </div>
+    </>
   )
 }

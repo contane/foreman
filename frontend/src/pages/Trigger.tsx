@@ -8,6 +8,7 @@ import { TextInput } from '../components/TextInput.js'
 import { InputInfo } from '../components/InputInfo.js'
 import { Button } from '../components/Button.js'
 import { ToggleSwitch } from '../components/ToggleSwitch.js'
+import { Card } from '../components/Card.js'
 
 export const Trigger: FunctionComponent = () => {
   const navigate = useNavigate()
@@ -47,29 +48,31 @@ export const Trigger: FunctionComponent = () => {
   }, [jobData, navigate])
 
   return (
-    <div>
+    <>
       <Heading>
         Custom run
       </Heading>
-      <form onSubmit={onTrigger} className='max-w-[32rem]'>
-        <Label text='Custom repository scope'>
-          <TextInput value={repositoryScope} onChange={(value) => setRepositoryScope(value)} />
-          <InputInfo>
-            If empty, the job will run on all configured repositories.
-            Optionally, you can specify a repository scope in the format <code>owner/name</code>.
-          </InputInfo>
-        </Label>
-        <Label text='Debug logging'>
-          <ToggleSwitch value={debugLogging} onChange={(value) => setDebugLogging(value)} />
-          <InputInfo>
-            Note: This option may cause very large logs that may be slow to load.
-            Choose a specific repository scope, if possible.
-          </InputInfo>
-        </Label>
-        <Button type='submit' disabled={!isValid || inProgress}>
-          Run job
-        </Button>
-      </form>
-    </div>
+      <Card className='max-w-[32rem]'>
+        <form onSubmit={onTrigger}>
+          <Label text='Custom repository scope'>
+            <TextInput value={repositoryScope} onChange={(value) => setRepositoryScope(value)} />
+            <InputInfo>
+              If empty, the job will run on all configured repositories.
+              Optionally, you can specify a repository scope in the format <code>owner/name</code>.
+            </InputInfo>
+          </Label>
+          <Label text='Debug logging'>
+            <ToggleSwitch value={debugLogging} onChange={(value) => setDebugLogging(value)} />
+            <InputInfo>
+              Note: This option may cause very large logs that may be slow to load.
+              Choose a specific repository scope, if possible.
+            </InputInfo>
+          </Label>
+          <Button type='submit' disabled={!isValid || inProgress}>
+            Run job
+          </Button>
+        </form>
+      </Card>
+    </>
   )
 }

@@ -13,6 +13,7 @@ import { ErrorMessage } from '../components/ErrorMessage.js'
 import { DateTime } from 'luxon'
 import { Button } from '../components/Button.js'
 import clsx from 'clsx'
+import { Card } from '../components/Card.js'
 
 export const Job: FunctionComponent = () => {
   const { namespace, name } = useParams()
@@ -30,7 +31,7 @@ export const Job: FunctionComponent = () => {
   const dialogPod = pods?.find((pod) => pod.name === dialogPodName)
 
   return (
-    <div>
+    <>
       <Heading>
         {job != null ? <span>Job: {job.namespace}/{job.name}</span> : <ColoredSkeleton />}
       </Heading>
@@ -58,7 +59,7 @@ export const Job: FunctionComponent = () => {
           onClose={() => setDialogPodName(undefined)}
         />
       )}
-    </div>
+    </>
   )
 }
 
@@ -115,25 +116,25 @@ const JobStatus: FunctionComponent<{
 
   if (!props.job.manual) {
     return (
-      <div className='p-4 flex flex-col gap-1 rounded bg-[#2b2d30]'>
+      <Card className='flex flex-col gap-1'>
         <p className='mb-2 font-semibold'>
           <Icon icon={faClock} className='mr-2' />
           This job was scheduled to run automatically.
         </p>
         {common}
-      </div>
+      </Card>
     )
   }
 
   return (
-    <div className='p-4 flex flex-col gap-1 rounded bg-[#2b2d30]'>
+    <Card className='flex flex-col gap-1'>
       <p className='text-orange-300 mb-2 font-semibold'>
         <Icon icon={faPaintRoller} className='mr-2' />
         {props.job.triggeredBy == null && 'This job was triggered manually by an unknown user.'}
         {props.job.triggeredBy != null && `This job was triggered manually by ${props.job.triggeredBy.username} (${props.job.triggeredBy.strategy} login).`}
       </p>
       {common}
-    </div>
+    </Card>
   )
 }
 
@@ -171,7 +172,7 @@ const Pod: FunctionComponent<{
   }, [progress])
 
   return (
-    <div className='mb-2 p-4 bg-[#2b2d30] border-2 border-[#43454a] rounded'>
+    <Card>
       {/* name and actions */}
       <div className='flex flex-row items-center justify-between'>
         <div>
@@ -217,13 +218,13 @@ const Pod: FunctionComponent<{
           <ColoredSkeleton className='mr-4 px-2' />
         </div>
       }
-    </div>
+    </Card>
   )
 }
 
 const DummyPod: FunctionComponent = () => {
   return (
-    <div className='mb-2 p-4 bg-[#2b2d30] border-2 border-[#43454a] rounded'>
+    <Card>
       {/* name and actions */}
       <div className='flex flex-row items-center justify-between'>
         <div className='flex items-center'>
@@ -247,7 +248,7 @@ const DummyPod: FunctionComponent = () => {
       <div className='mt-4 pt-4 border-t-2 border-white/25'>
         <ColoredSkeleton className='mr-4 px-2' />
       </div>
-    </div>
+    </Card>
   )
 }
 

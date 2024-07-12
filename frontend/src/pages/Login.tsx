@@ -8,6 +8,7 @@ import { Heading } from '../components/Heading.js'
 import { useSearchParams } from 'react-router-dom'
 import { useApiSubscription } from '../api/subscription.js'
 import { ErrorMessage } from '../components/ErrorMessage.js'
+import { Card } from '../components/Card.js'
 
 export const Login: FunctionComponent = () => {
   const [searchParams] = useSearchParams()
@@ -16,22 +17,22 @@ export const Login: FunctionComponent = () => {
   const authStrategies = useApiSubscription({ interval: 60_000 }, api.authStrategies)
 
   return (
-    <div>
+    <>
       <Heading>
         Login
       </Heading>
       {authStrategies.data != null && (
         <div className='max-w-[32rem]'>
           {authStrategies.data.length === 0 && (
-            <div>
+            <Card>
               No login methods are available.
-            </div>
+            </Card>
           )}
           {authStrategies.data.includes('oidc') && <OidcLogin hasError={error === 'oidc'} />}
           {authStrategies.data.includes('local') && <LocalLogin hasError={error === 'local'} />}
         </div>
       )}
-    </div>
+    </>
   )
 }
 
@@ -39,12 +40,12 @@ const LoginOption: FunctionComponent<PropsWithChildren<{
   title: string
 }>> = (props) => {
   return (
-    <div className='border-2 border-white/25 rounded p-4 mb-6'>
+    <Card>
       <p className='text-lg mb-4'>
         {props.title}
       </p>
       {props.children}
-    </div>
+    </Card>
   )
 }
 
