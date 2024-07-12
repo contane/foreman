@@ -4,3 +4,7 @@ export enum ForemanAnnotations {
   RepositoryScope = 'foreman.contane.net/repository-scope',
   DebugLogging = 'foreman.contane.net/debug-logging'
 }
+
+export enum ForemanLabels {
+  CronJob = 'foreman.contane.net/cronjob'
+}
