@@ -175,7 +175,7 @@ const Pod: FunctionComponent<{
     <Card>
       {/* name and actions */}
       <div className='flex flex-row items-center justify-between'>
-        <div>
+        <div className='flex items-center'>
           <StatusDot status={pod.status} />
           <span className='ml-2'>{pod.namespace}/{pod.name}</span>
         </div>
