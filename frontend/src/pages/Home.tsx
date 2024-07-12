@@ -23,7 +23,7 @@ export const Home: FunctionComponent = () => {
   const isMobileNavigation = useMobileNavigation()
 
   return (
-    <div>
+    <>
       <Heading>
         Overview
       </Heading>
@@ -45,7 +45,7 @@ export const Home: FunctionComponent = () => {
         </InfoCard>
       </dl>
       {isMobileNavigation && <JobsSection />}
-    </div>
+    </>
   )
 }
 
