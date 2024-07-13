@@ -9,7 +9,7 @@ export interface PodProgressRoute {
   Reply: ProgressItem[]
 }
 
-export const podProgressRoute = ({ logsController }: Controllers, config: BackendConfig): FastifyPluginAsync => async (app) => {
+export const podProgressRoute = ({ podController, logsController }: Controllers, config: BackendConfig): FastifyPluginAsync => async (app) => {
   app.addHook('preValidation', authenticateSession())
 
   app.get<PodProgressRoute & {
@@ -27,7 +27,12 @@ export const podProgressRoute = ({ logsController }: Controllers, config: Backen
     }
     const progress = extractProgress(logs, { repositoryBaseUrl: config.gitlab.host })
     if (progress == null) {
-      // In case the log cannot be parsed, progress is unavailable, so return a 404.
+      // If the pod is done, but there are no progress items, this indicates no repositories were processed.
+      const pod = await podController.findPod({ namespace: request.params.namespace, name: request.params.name })
+      if (pod?.status?.phase === 'Succeeded') {
+        return []
+      }
+      // The pod is either not available or still running, so progress is undefined.
       return await notFound((reply))
     }
     return progress

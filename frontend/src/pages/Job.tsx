@@ -154,8 +154,11 @@ const Pod: FunctionComponent<{
 
   // A value between 0 and 1 representing the progress of repositories
   const progressValue = useMemo(() => {
-    if (progress == null || progress.length === 0) {
+    if (progress == null) {
       return 0
+    }
+    if (progress.length === 0) {
+      return 1
     }
     let value = 0
     for (const item of progress ?? []) {
@@ -208,6 +211,9 @@ const Pod: FunctionComponent<{
               />
             </div>
             <div className='mt-4'>
+              {progress.length === 0 && (
+                <p className='py-1'>No repositories were processed.</p>
+              )}
               {progress.map((item) => (
                 <ProgressItem key={item.repository} item={item} />
               ))}
