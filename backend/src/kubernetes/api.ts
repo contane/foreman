@@ -42,10 +42,18 @@ export class KubernetesApi {
     name: string
   }): Promise<V1CronJob | undefined> {
     this.log.debug({ options }, 'k8s_getCronJob')
-    const result = await this.request(async () => {
-      return await this.batchApi.readNamespacedCronJob(options.name, options.namespace)
+    return await this.request(async () => {
+      try {
+        const result = await this.batchApi.readNamespacedCronJob(options.name, options.namespace)
+        return result.body
+      } catch (err) {
+        if (err instanceof HttpError && err.statusCode === 404) {
+          this.log.warn({ options }, 'k8s_getCronJob: not found')
+          return undefined
+        }
+        throw err
+      }
     })
-    return result.body
   }
 
   async getJobs (options: {

@@ -52,7 +52,7 @@ const NavigationJobsSection: FunctionComponent<{
       {!loading
         ? (
           <NavigationItem to='/jobs' onNavigate={props.onNavigate}>
-            View all jobs ({jobs?.length})
+            View all jobs {jobs != null ? `(${jobs.length})` : ''}
           </NavigationItem>
           )
         : (
