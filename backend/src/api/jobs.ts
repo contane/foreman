@@ -5,7 +5,7 @@ import { authenticateSession } from '../auth/common.js'
 import { V1Job } from '@kubernetes/client-node'
 import assert from 'node:assert'
 import { DEFAULT_NAMESPACE } from '../kubernetes/api.js'
-import { ForemanAnnotations } from '../annotations.js'
+import { ForemanAnnotations } from '../metadata.js'
 
 interface JobsItem {
   namespace: string
