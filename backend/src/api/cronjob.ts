@@ -8,8 +8,8 @@ export interface CronJobRoute {
   Reply: {
     schedule?: string
     timeZone?: string
+    nextScheduleTime?: string
     suspend: boolean
-    nextScheduleTime: string
   }
 }
 
@@ -27,15 +27,20 @@ export const cronjobRoute = ({ cronJobController }: Controllers): FastifyPluginA
     }
 
     const schedule = typeof cronJob.spec?.schedule === 'string' ? cronJob.spec.schedule : undefined
-    const interval = cronParser.parseExpression(schedule ?? '', {
-      tz: typeof cronJob.spec?.timeZone === 'string' ? cronJob.spec.timeZone : undefined
-    })
+
+    let nextScheduleTime: string | undefined
+    if (schedule != null) {
+      const interval = cronParser.parseExpression(schedule ?? '', {
+        tz: typeof cronJob.spec?.timeZone === 'string' ? cronJob.spec.timeZone : undefined
+      })
+      nextScheduleTime = interval.next().toISOString()
+    }
 
     return {
       schedule,
       timeZone: cronJob.spec?.timeZone,
-      suspend: cronJob.spec?.suspend ?? false,
-      nextScheduleTime: interval.next().toISOString()
+      nextScheduleTime,
+      suspend: cronJob.spec?.suspend ?? false
     }
   })
 }

@@ -9,6 +9,7 @@ import { JobPanel } from '../components/JobPanel.js'
 import { ColoredSkeleton } from '../components/ColoredSkeleton.js'
 import { Link } from 'react-router-dom'
 import { useMobileNavigation } from '../util/navigation.js'
+import { ErrorMessage } from '../components/ErrorMessage.js'
 
 const JOB_HISTORY_LIMIT = 3
 
@@ -18,7 +19,7 @@ function lowercaseFirstLetter (str: string): string {
 }
 
 export const Home: FunctionComponent = () => {
-  const { loading, data: cronJob } = useApiSubscription({ interval: 60_000 }, api.cronJob)
+  const { data: cronJob, error } = useApiSubscription({ interval: 60_000 }, api.cronJob)
 
   const isMobileNavigation = useMobileNavigation()
 
@@ -27,23 +28,34 @@ export const Home: FunctionComponent = () => {
       <Heading>
         Overview
       </Heading>
-      <dl className='my-1 grid grid-cols-1 md:grid-cols-2 gap-4'>
+      {error != null && (
+        <ErrorMessage>
+          Error loading CronJob: {error.message}
+        </ErrorMessage>
+      )}
+      <div className='my-1 grid grid-cols-1 md:grid-cols-2 gap-4'>
         <InfoCard title='Next run'>
-          {!loading && cronJob != null
-            ? (
-              <>
-                {DateTime.fromISO(cronJob.nextScheduleTime).toLocaleString(DateTime.DATETIME_MED)}&nbsp;
-                ({DateTime.fromISO(cronJob.nextScheduleTime).toRelative()})
-              </>
-              )
-            : null}
+          {cronJob == null && <ColoredSkeleton />}
+          {cronJob?.nextScheduleTime != null && (
+            <>
+              {DateTime.fromISO(cronJob.nextScheduleTime).toLocaleString(DateTime.DATETIME_MED)}&nbsp;
+              ({DateTime.fromISO(cronJob.nextScheduleTime).toRelative()})
+            </>
+          )}
+          {cronJob != null && cronJob.nextScheduleTime == null && (
+            'Not scheduled'
+          )}
         </InfoCard>
         <InfoCard title='CronJob schedule'>
-          {!loading && cronJob?.schedule != null
-            ? `${cronJob.schedule} (${lowercaseFirstLetter(cronstrue.toString((cronJob.schedule)))})`
-            : null}
+          {cronJob == null && <ColoredSkeleton />}
+          {cronJob?.schedule != null && (
+            `${cronJob.schedule} (${lowercaseFirstLetter(cronstrue.toString((cronJob.schedule)))})`
+          )}
+          {cronJob != null && cronJob.schedule == null && (
+            'Not scheduled'
+          )}
         </InfoCard>
-      </dl>
+      </div>
       {isMobileNavigation && <JobsSection />}
     </>
   )
