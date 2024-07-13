@@ -3,7 +3,7 @@ import { CronJobController } from './cronjob.js'
 import assert from 'node:assert'
 import { randomBytes } from 'node:crypto'
 import { V1Job } from '@kubernetes/client-node'
-import { ForemanAnnotations } from '../annotations.js'
+import { ForemanAnnotations, ForemanLabels } from '../metadata.js'
 import { JobController } from './job.js'
 
 export class TriggerController {
@@ -40,10 +40,15 @@ export class TriggerController {
       annotations[ForemanAnnotations.DebugLogging] = 'true'
     }
 
+    // Ensure we can attribute the job to the cronjob later
+    const labels: Record<string, string> = {}
+    labels[ForemanLabels.CronJob] = cronJob.metadata.name
+
     const result = await this.k8s.triggerCronJob({
       cronJob,
       jobName: `${cronJob.metadata.name}-foreman-${randomId()}`,
       annotations,
+      labels,
       env
     })
 

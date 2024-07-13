@@ -93,6 +93,7 @@ export class KubernetesApi {
     cronJob: V1CronJob
     jobName: string
     annotations?: Record<string, string>
+    labels?: Record<string, string>
     env: Record<string, string>
   }): Promise<V1Job> {
     assert.ok(options.cronJob.metadata?.namespace != null)
@@ -110,6 +111,7 @@ export class KubernetesApi {
     let jobBody = options.cronJob.spec.jobTemplate
     jobBody = applyMetadataName(jobBody, options.jobName)
     jobBody = applyMetadataAnnotations(jobBody, options.annotations ?? {})
+    jobBody = applyMetadataLabels(jobBody, options.labels ?? {})
     jobBody = applyEnvToJobContainers(jobBody, options.env)
     // Cleanup job after 1 hour
     jobBody = applyTtl(jobBody, 60 * 60)
@@ -128,6 +130,19 @@ function applyMetadataAnnotations (jobBody: k8s.V1Job, annotations: Record<strin
       annotations: {
         ...jobBody.metadata?.annotations,
         ...annotations
+      }
+    }
+  }
+}
+
+function applyMetadataLabels (jobBody: k8s.V1Job, labels: Record<string, string>): k8s.V1Job {
+  return {
+    ...jobBody,
+    metadata: {
+      ...jobBody.metadata,
+      labels: {
+        ...jobBody.metadata?.labels,
+        ...labels
       }
     }
   }
