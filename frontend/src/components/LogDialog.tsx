@@ -21,7 +21,7 @@ export const LogDialog: FunctionComponent<{
   return (
     <Dialog open onClose={props.onClose} className='relative z-50'>
       <div className='fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/50'>
-        <DialogPanel className='relative w-[max(90vw,20em)] min-h-[min(30vh,24em)] bg-[#2b2d30] p-2 rounded'>
+        <DialogPanel className='relative w-[max(90vw,20rem)] h-[max(90vh,12rem)] flex flex-col bg-[#2b2d30] p-2 rounded'>
           <button
             type='button'
             className='absolute top-2 right-2 text-white text-2xl py-0 px-2 leading-none hover:text-gray-300 focus:text-gray-300'
@@ -91,12 +91,10 @@ const LogDisplay: FunctionComponent<{
 
   if (logs == null) {
     return (
-      <div className='flex justify-center items-center font-mono text-white bg-[#111] p-4 min-h-[80vh] overflow-scroll whitespace-pre'>
-        <div className='mx-auto'>
-          <div role='status'>
-            <Icon icon={faCircleNotch} className='inline w-8 h-8 mr-2 animate-spin' />
-            <span className='sr-only'>Loading...</span>
-          </div>
+      <div className='h-full font-mono text-white bg-[#111] p-4 overflow-y-scroll overflow-x-auto whitespace-pre flex justify-center items-center'>
+        <div role='status'>
+          <Icon icon={faCircleNotch} className='inline w-8 h-8 mr-2 animate-spin' />
+          <span className='sr-only'>Loading...</span>
         </div>
       </div>
     )
@@ -105,7 +103,7 @@ const LogDisplay: FunctionComponent<{
   return (
     <div
       ref={logElement}
-      className='font-mono text-white bg-[#111] p-4 max-h-[80vh] overflow-scroll whitespace-pre'
+      className='h-full font-mono text-white bg-[#111] p-4 overflow-y-scroll overflow-x-auto whitespace-pre'
       onScroll={(event) => {
         if (props.onChangeFollow != null && event.target instanceof HTMLDivElement) {
           const { scrollTop, scrollHeight, clientHeight } = event.target
