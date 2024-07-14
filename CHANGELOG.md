@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.3.0](https://github.com/contane/foreman/compare/v0.2.0...v0.3.0) (2024-07-14)
+
+
+### Features
+
+* Handle CronJob not found ([#43](https://github.com/contane/foreman/issues/43)) ([b8a094b](https://github.com/contane/foreman/commit/b8a094bc591d5870788512041e232c5a28630da9))
+* Handle empty repository autodiscovery ([#45](https://github.com/contane/foreman/issues/45)) ([b35022a](https://github.com/contane/foreman/commit/b35022ac8985750fd8a8295b61a70b6a07c0db71))
+* Use consistent design for card components ([#35](https://github.com/contane/foreman/issues/35)) ([7f230f3](https://github.com/contane/foreman/commit/7f230f3d1016e40db8369359970bc8140a66892f))
+* Verify job ownership ([#37](https://github.com/contane/foreman/issues/37)) ([f854f8c](https://github.com/contane/foreman/commit/f854f8cc46d2987e923a72eeed0d3dbde8aa1ad7))
+
+
+### Bug Fixes
+
+* Refactor progress extraction and add tests ([#40](https://github.com/contane/foreman/issues/40)) ([060f041](https://github.com/contane/foreman/commit/060f041d0606d5ac1b4a2ead99f4c57b0fa1b3c7))
+* Set fixed height for LogDialog ([#44](https://github.com/contane/foreman/issues/44)) ([c5471be](https://github.com/contane/foreman/commit/c5471be1051d7286253de191f8e449c292e4471f))
+* Use distinct icons for "status dot" ([#38](https://github.com/contane/foreman/issues/38)) ([90a2a02](https://github.com/contane/foreman/commit/90a2a02660a826ead4eb73001aabb43a48dc7f6c))
+
 ## [0.2.0](https://github.com/contane/foreman/compare/v0.1.1...v0.2.0) (2024-07-10)
 
 
