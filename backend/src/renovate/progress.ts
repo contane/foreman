@@ -12,6 +12,11 @@ export function extractProgress (logs: string, options: {
   const repositories = new Map<string, ProgressItem>()
   let foundRepositories = false
   for (const line of lines(logs)) {
+    // Avoid parsing log lines that are obviously irrelevant.
+    // This improves performance even for small logs, but especially for debug/trace logs it can improve by 5-10x.
+    if (!line.includes('"repositories"') && !line.includes('Repository started') && !line.includes('Repository finished')) {
+      continue
+    }
     const message = tryParseLogMessage(line)
     // Note: While it looks ugly, manual validation is more than 3x faster than using superstruct.
     //       This is worth it here as there is lots of data to process.
@@ -20,7 +25,7 @@ export function extractProgress (logs: string, options: {
     }
     // The initial log message is for autodiscovery and tells us about the repositories that will be processed.
     if ('repositories' in message && Array.isArray(message.repositories) &&
-      message.repositories.every(msg => typeof msg === 'string')) {
+      message.repositories.every((item) => typeof item === 'string')) {
       foundRepositories = true
       for (const repository of message.repositories) {
         const item: ProgressItem = { repository, state: 'pending' }
