@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest a new feature for foreman
+description: Suggest a new feature for Foreman
 body:
   - type: textarea
     attributes:
@@ -19,14 +19,14 @@ body:
 
   - type: textarea
     attributes:
-      label: Considered Alternatives
+      label: Considered alternatives
       description: Describe any alternative solutions or features you've thought about.
     validations:
       required: false
 
   - type: textarea
     attributes:
-      label: Additional Context
+      label: Additional context
       description: Include any additional information or screenshots relevant to the feature request.
     validations:
       required: false
