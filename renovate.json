@@ -3,6 +3,11 @@
   "extends": [
     "config:recommended"
   ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "platformAutomerge": true
+  },
   "packageRules": [
     {
       "matchFileNames": ["Dockerfile"],
