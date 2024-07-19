@@ -4,49 +4,20 @@ import { backend, notFound } from 'backend'
 import { fastifyStatic } from '@fastify/static'
 import path from 'node:path'
 import { fastify } from 'fastify'
-import { Config, readConfigDirectory } from './config.js'
-import { getPort } from './environment.js'
-import { loadKubeConfig } from './kube-config.js'
-import { StructError } from 'superstruct'
+import { Config } from './config.js'
+import { KubeConfig } from '@kubernetes/client-node'
 import { handleError } from './handle-error.js'
-import pino from 'pino'
+import { BaseLogger } from 'pino'
 
-const log = pino({
-  level: 'info',
-  // do not log pid and hostname
-  base: undefined,
-  // use ISO strings for timestamps instead of milliseconds
-  timestamp: pino.stdTimeFunctions.isoTime,
-  // use string levels (e.g., "info") instead of level numbers (e.g., 30)
-  formatters: {
-    level: (label) => ({ level: label }),
-    log: (object) => {
-      if (object instanceof Error) {
-        return pino.stdSerializers.errWithCause(object)
-      }
-      return object
-    }
-  }
-})
+type CloseFunction = () => Promise<void>
 
-log.info('process_start')
-
-let config: Config
-try {
-  config = await readConfigDirectory(path.join(process.cwd(), 'config'))
-} catch (error) {
-  if (error instanceof StructError) {
-    // the value may contain secrets, so don't log it
-    error.value = undefined
-    error.branch = []
-  }
-  log.fatal(error, 'config_error')
-  process.exit(1)
-}
-
-try {
-  const port = getPort()
-  const kubeConfig = loadKubeConfig(log, config)
+export async function startServer (options: {
+  log: BaseLogger
+  config: Config
+  port: number
+  kubeConfig: KubeConfig
+}): Promise<CloseFunction> {
+  const { log, config, port, kubeConfig } = options
 
   const app = fastify({
     logger: log
@@ -85,7 +56,8 @@ try {
   })
 
   await app.listen({ port, host: '::' })
-} catch (error) {
-  log.fatal(error, 'uncaught_error')
-  process.exit(1)
+
+  return async () => {
+    await app.close()
+  }
 }

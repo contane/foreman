@@ -37,4 +37,4 @@ EXPOSE 8080
 
 # use tini as init process since Node.js isn't designed to be run as PID 1
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["node", "--disable-proto=delete", "dist/server.js"]
+CMD ["node", "--disable-proto=delete", "dist/main.js"]
