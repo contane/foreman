@@ -41,7 +41,7 @@
     "eslint-plugin-jsx-a11y": "6.9.0",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "4.6.2",
-    "mocha": "10.6.0",
+    "mocha": "10.7.0",
     "tsx": "4.16.2",
     "typescript": "5.5.3"
   },
