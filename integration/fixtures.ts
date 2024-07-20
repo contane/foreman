@@ -1,7 +1,7 @@
 import pino, { BaseLogger } from 'pino'
 import { KubeConfig } from '@kubernetes/client-node'
 import { startServer } from '../src/server.js'
-import { createConfig } from '../src/config.js'
+import { Config, createConfig } from '../src/config.js'
 
 const testServerPort = 3333
 const testClusterPort = 56443
@@ -29,10 +29,16 @@ interface TestServerResult {
  *
  * @returns Information about the server.
  */
-export async function startTestServer (): Promise<TestServerResult> {
+export async function startTestServer (options?: {
+  config?: (input: Config) => Config
+}): Promise<TestServerResult> {
+  let config = createConfig()
+  if (options?.config != null) {
+    config = options.config(config)
+  }
   const closeFn = await startServer({
     log: getTestLogger(),
-    config: createConfig(),
+    config,
     port: testServerPort,
     kubeConfig: getTestKubeConfig()
   })
