@@ -14,7 +14,9 @@
   "scripts": {
     "build": "npm run build --workspaces && node -e \"fs.rmSync('./dist',{force:true,recursive:true})\" && tsc",
     "lint": "npm run lint --workspaces && tsc --noEmit -p tsconfig.lint.json && eslint --ignore-path .gitignore src",
-    "test": "npm run test --workspaces --if-present && mocha --require tsx --recursive \"test/**/*.ts\"",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "npm run test --workspaces --if-present && mocha --require tsx --recursive \"test/**/*.ts\"",
+    "test:integration": "mocha --require tsx --recursive \"integration/**/*.ts\"",
     "start": "node --disable-proto=delete dist/main.js"
   },
   "repository": {
