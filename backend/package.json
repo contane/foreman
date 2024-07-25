@@ -24,7 +24,7 @@
     "test": "mocha --require tsx --recursive \"test/**/*.ts\""
   },
   "dependencies": {
-    "pino-pretty": "11.2.1",
+    "pino-pretty": "11.2.2",
     "secure-json-parse": "2.7.0"
   }
 }
