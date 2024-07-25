@@ -60,6 +60,6 @@
     "pino": "9.3.2",
     "react-router-dom": "6.25.1",
     "superstruct": "2.0.2",
-    "yaml": "2.4.5"
+    "yaml": "2.5.0"
   }
 }
