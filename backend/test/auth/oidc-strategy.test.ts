@@ -74,6 +74,7 @@ describe('auth/oidc-strategy.ts', () => {
         session: {}
       }
       const promise = new Promise<void>((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
         strategy.error = (err: any) => reject(err)
         strategy.fail = () => reject(new Error('should not have failed'))
         strategy.success = () => reject(new Error('should not have succeeded'))
