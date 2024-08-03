@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1](https://github.com/contane/foreman/compare/v0.4.0...v0.4.1) (2024-08-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency luxon to v3.5.0 ([#87](https://github.com/contane/foreman/issues/87)) ([c6cf8f0](https://github.com/contane/foreman/commit/c6cf8f0600bc0afb46a956cfb6c12e5ee20ab315))
+* **deps:** update dependency react-router-dom to v6.26.0 ([#84](https://github.com/contane/foreman/issues/84)) ([d48c73b](https://github.com/contane/foreman/commit/d48c73b47e936109f8278ad4bfd69e5da6e386c8))
+
 ## [0.4.0](https://github.com/contane/foreman/compare/v0.3.0...v0.4.0) (2024-07-25)
 
 
