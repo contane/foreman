@@ -42,7 +42,7 @@
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "4.6.2",
     "mocha": "10.7.0",
-    "tsx": "4.16.5",
+    "tsx": "4.17.0",
     "typescript": "5.5.4"
   },
   "dependencies": {
