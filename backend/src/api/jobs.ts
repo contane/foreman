@@ -43,7 +43,7 @@ function project (job: V1Job): JobsItem {
   const isSuccess = typeof job.status?.succeeded === 'number' && job.status.succeeded > 0
   const isActive = typeof job.status?.active === 'number' && job.status.active > 0
 
-  const isManual = job.metadata?.annotations?.[ForemanAnnotations.Manual] === 'true' ?? false
+  const isManual = job.metadata?.annotations?.[ForemanAnnotations.Manual] === 'true'
   const repositoryScope = job.metadata?.annotations?.[ForemanAnnotations.RepositoryScope]
   const debugLogging = job.metadata?.annotations?.[ForemanAnnotations.DebugLogging] != null
     ? job.metadata.annotations[ForemanAnnotations.DebugLogging] === 'true'
