@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@meyfa/eslint-config": "7.0.0",
-    "@types/mocha": "10.0.7",
+    "@types/mocha": "10.0.8",
     "@types/ms": "0.7.34",
     "@types/node": "20.16.5",
     "@types/passport-local": "1.0.38",
