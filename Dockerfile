@@ -1,5 +1,5 @@
 # -- compilation --
-FROM node:20.17.0-alpine AS build
+FROM node:20.18.0-alpine AS build
 WORKDIR /app
 
 # install dependencies
@@ -14,7 +14,7 @@ RUN npm run build
 
 
 # -- execution --
-FROM node:20.17.0-alpine
+FROM node:20.18.0-alpine
 WORKDIR /app
 
 # install PRODUCTION dependencies
