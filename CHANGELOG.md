@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.4.1](https://github.com/contane/foreman/compare/v0.4.0...v0.4.1) (2024-10-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @headlessui/react to v2.1.6 ([#101](https://github.com/contane/foreman/issues/101)) ([54f3430](https://github.com/contane/foreman/commit/54f3430bf6cff35b130c24678d78562ee94d2be7))
+* **deps:** update dependency @headlessui/react to v2.1.8 ([#109](https://github.com/contane/foreman/issues/109)) ([a169d30](https://github.com/contane/foreman/commit/a169d304d1d1fcc8dbb3df8f7deaa37e7078f3a0))
+* **deps:** update dependency @headlessui/react to v2.1.9 ([#122](https://github.com/contane/foreman/issues/122)) ([d9d13c3](https://github.com/contane/foreman/commit/d9d13c3f86e59ba29bc97d47cb1dd44b93c1a3f0))
+* **deps:** update dependency @kubernetes/client-node to v0.22.0 ([#111](https://github.com/contane/foreman/issues/111)) ([7be37be](https://github.com/contane/foreman/commit/7be37be6147eeb1cd05cc8cbd6bd38cdeaca07e8))
+* **deps:** update dependency luxon to v3.5.0 ([#87](https://github.com/contane/foreman/issues/87)) ([c6cf8f0](https://github.com/contane/foreman/commit/c6cf8f0600bc0afb46a956cfb6c12e5ee20ab315))
+* **deps:** update dependency openid-client to v5.7.0 ([#106](https://github.com/contane/foreman/issues/106)) ([030648a](https://github.com/contane/foreman/commit/030648aed13d0120c4741ba55fafbc7f7866163c))
+* **deps:** update dependency pino to v9.4.0 ([#104](https://github.com/contane/foreman/issues/104)) ([1920005](https://github.com/contane/foreman/commit/19200057e793459f8dbb5897d0260758312e94e2))
+* **deps:** update dependency react-loading-skeleton to v3.5.0 ([#120](https://github.com/contane/foreman/issues/120)) ([1a899aa](https://github.com/contane/foreman/commit/1a899aa50f85da7c291e8aaa74338ebfd1d87dde))
+* **deps:** update dependency react-router-dom to v6.26.0 ([#84](https://github.com/contane/foreman/issues/84)) ([d48c73b](https://github.com/contane/foreman/commit/d48c73b47e936109f8278ad4bfd69e5da6e386c8))
+* **deps:** update dependency react-router-dom to v6.26.2 ([#98](https://github.com/contane/foreman/issues/98)) ([474cce0](https://github.com/contane/foreman/commit/474cce061945e4f52c743853a2eb25ee0cf10df1))
+* **deps:** update dependency yaml to v2.5.1 ([#105](https://github.com/contane/foreman/issues/105)) ([1843bf3](https://github.com/contane/foreman/commit/1843bf385dbafa4218c5256d552a81dc1249f7f3))
+* **deps:** update node docker tag to v20.17.0 ([#94](https://github.com/contane/foreman/issues/94)) ([4c9ce0e](https://github.com/contane/foreman/commit/4c9ce0e145fb3b33026f9f026dbe74f8db375094))
+* **deps:** update node.js to v20.18.0 ([#124](https://github.com/contane/foreman/issues/124)) ([e9ed12d](https://github.com/contane/foreman/commit/e9ed12d2c949d6b5d333e0cf200f376d9aa33ffa))
+* Remove unnecessary `??` operator ([#107](https://github.com/contane/foreman/issues/107)) ([5359660](https://github.com/contane/foreman/commit/53596602c161833de2c6803fe855f8b17e814fce))
+
 ## [0.4.0](https://github.com/contane/foreman/compare/v0.3.0...v0.4.0) (2024-07-25)
 
 
