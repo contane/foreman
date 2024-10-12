@@ -3,16 +3,15 @@ import { backend, notFound } from 'backend'
 
 import { fastifyStatic } from '@fastify/static'
 import path from 'node:path'
-import { fastify } from 'fastify'
+import { fastify, FastifyBaseLogger } from 'fastify'
 import { Config } from './config.js'
 import { KubeConfig } from '@kubernetes/client-node'
 import { handleError } from './handle-error.js'
-import { BaseLogger } from 'pino'
 
 type CloseFunction = () => Promise<void>
 
 export async function startServer (options: {
-  log: BaseLogger
+  log: FastifyBaseLogger
   config: Config
   port: number
   kubeConfig: KubeConfig
@@ -20,7 +19,7 @@ export async function startServer (options: {
   const { log, config, port, kubeConfig } = options
 
   const app = fastify({
-    logger: log
+    loggerInstance: log
   })
 
   app.setErrorHandler(async (error, req, reply) => await handleError(error, reply))

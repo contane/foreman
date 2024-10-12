@@ -1,7 +1,8 @@
-import pino, { BaseLogger } from 'pino'
+import pino from 'pino'
 import { KubeConfig } from '@kubernetes/client-node'
 import { startServer } from '../src/server.js'
 import { Config, createConfig } from '../src/config.js'
+import { FastifyBaseLogger } from 'fastify'
 
 const testServerPort = 3333
 const testClusterPort = 56443
@@ -48,7 +49,7 @@ export async function startTestServer (options?: {
   }
 }
 
-function getTestLogger (): BaseLogger {
+function getTestLogger (): FastifyBaseLogger {
   return pino({ level: 'silent' })
 }
 
