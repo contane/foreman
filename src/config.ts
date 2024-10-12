@@ -104,7 +104,18 @@ export const defaultConfig: Config = Object.freeze({
 })
 
 export async function readConfigDirectory (directory: string): Promise<Config> {
-  const entries = await fs.promises.readdir(directory, { withFileTypes: true })
+  let entries: fs.Dirent[]
+  try {
+    entries = await fs.promises.readdir(directory, { withFileTypes: true })
+  } catch (err: unknown) {
+    if (typeof err === 'object' && err != null && 'code' in err && err.code === 'ENOENT') {
+      // ignore missing config directory
+      entries = []
+    } else {
+      throw err
+    }
+  }
+
   const configFiles = entries.filter((entry) => entry.isFile() && entry.name.endsWith('.yaml'))
 
   // sort by name, so that 01-foo.yaml is read before 02-bar.yaml
