@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.2](https://github.com/contane/foreman/compare/v0.4.1...v0.4.2) (2024-10-12)
+
+
+### Bug Fixes
+
+* Avoid crash if run without config directory ([#137](https://github.com/contane/foreman/issues/137)) ([1986b55](https://github.com/contane/foreman/commit/1986b55befb593a57a1c12dbb9e60e9210b6a28e))
+* **deps:** Pin sodium-native to v4.2.0 ([#136](https://github.com/contane/foreman/issues/136)) ([6042482](https://github.com/contane/foreman/commit/6042482f1f9bb1e3c1e5b854c76e0c544137cab6))
+* **deps:** update dependency @headlessui/react to v2.1.10 ([#131](https://github.com/contane/foreman/issues/131)) ([211e794](https://github.com/contane/foreman/commit/211e7941b42370c6ab31ca01d10db67465ee8835))
+* **deps:** update dependency react-router-dom to v6.27.0 ([#134](https://github.com/contane/foreman/issues/134)) ([bf08a53](https://github.com/contane/foreman/commit/bf08a533b03859c2768240fc0ac725877f224e0e))
+
 ## [0.4.1](https://github.com/contane/foreman/compare/v0.4.0...v0.4.1) (2024-10-05)
 
 
