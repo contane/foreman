@@ -34,7 +34,7 @@ export class PodController {
     const result: V1Pod[] = []
     for (const job of jobs) {
       assert.ok(job.metadata?.namespace != null)
-      assert.ok(job.metadata?.name != null)
+      assert.ok(job.metadata.name != null)
       const pods = await this.getPodsForJob({
         namespace: job.metadata.namespace,
         name: job.metadata.name
@@ -51,7 +51,7 @@ export class PodController {
     name: string
   }): Promise<V1Pod | undefined> {
     for (const pod of await this.listAllPods()) {
-      if (pod.metadata?.namespace === podMetadata.namespace && pod.metadata?.name === podMetadata.name) {
+      if (pod.metadata?.namespace === podMetadata.namespace && pod.metadata.name === podMetadata.name) {
         return pod
       }
     }

@@ -18,7 +18,7 @@ export interface SubscriptionOptions {
  * @param args The arguments to pass to the route.
  * @returns An object with the current state of the request.
  */
-export function useApiSubscription <T extends {}, Args extends unknown[]> (
+export function useApiSubscription<T extends {}, Args extends unknown[]> (
   options: SubscriptionOptions,
   route: ApiRoute<T, Args>,
   ...args: Args

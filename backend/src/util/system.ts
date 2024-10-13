@@ -11,7 +11,7 @@ export function getAvailableMemory (reserve = 0): number | undefined {
   // See https://docs.libuv.org/en/v1.x/misc.html#c.uv_get_constrained_memory
   // It is important that we don't return a gigantic number here, as the scrypt algorithm doesn't allow it.
   const constrainedMemory = process.constrainedMemory()
-  if (constrainedMemory != null && constrainedMemory > 0 && constrainedMemory <= MAX_CONSTRAINED_MEMORY) {
+  if (constrainedMemory > 0 && constrainedMemory <= MAX_CONSTRAINED_MEMORY) {
     const memoryUsage = process.memoryUsage.rss()
     return Math.max(0, constrainedMemory - memoryUsage - reserve)
   }

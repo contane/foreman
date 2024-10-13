@@ -37,7 +37,7 @@ export const JobPanel: FunctionComponent<{
       <div className='text-gray-200 text-sm'>
         {props.startTime != null ? DateTime.fromISO(props.startTime).toRelative() : <ColoredSkeleton />}
         {props.manual && (
-        <Annotation icon={faPaintRoller} text='Manual' />
+          <Annotation icon={faPaintRoller} text='Manual' />
         )}
       </div>
     </LinkCard>

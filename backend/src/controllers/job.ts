@@ -52,7 +52,7 @@ export class JobController {
     if (jobs == null) {
       return undefined
     }
-    return jobs.find(j => j.metadata?.namespace === job.namespace && j.metadata?.name === job.name)
+    return jobs.find((j) => j.metadata?.namespace === job.namespace && j.metadata.name === job.name)
   }
 
   invalidateCache (cronJob: V1CronJob): void {

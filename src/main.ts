@@ -78,7 +78,7 @@ try {
     abortController.signal.addEventListener('abort', () => {
       close().then(() => {
         log.info('server_closed')
-      }).catch((error) => {
+      }).catch((error: unknown) => {
         log.error(error, 'server_close_error')
       })
     })

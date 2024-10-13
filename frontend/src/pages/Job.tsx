@@ -69,9 +69,6 @@ const JobStatus: FunctionComponent<{
   const navigate = useNavigate()
 
   const retry = useCallback(() => {
-    if (props.job == null) {
-      return undefined
-    }
     const params = new URLSearchParams()
     if (props.job.settings.repositoryScope != null) {
       params.set('repositoryScope', props.job.settings.repositoryScope)
@@ -161,7 +158,7 @@ const Pod: FunctionComponent<{
       return 1
     }
     let value = 0
-    for (const item of progress ?? []) {
+    for (const item of progress) {
       switch (item.state) {
         case 'started':
           value += 1
@@ -203,26 +200,26 @@ const Pod: FunctionComponent<{
       {/* progress summary */}
       {!loading && progress != null
         ? (
-          <>
-            <div className='mt-4 w-full rounded overflow-clip bg-gray-600'>
-              <div
-                className='h-2 bg-green-700 rounded transition-all duration-500 shadow-md shadow-black'
-                style={{ width: `${progressValue * 100}%` }}
-              />
-            </div>
-            <div className='mt-4'>
-              {progress.length === 0 && (
-                <p className='py-1'>No repositories were processed.</p>
-              )}
-              {progress.map((item) => (
-                <ProgressItem key={item.repository} item={item} />
-              ))}
-            </div>
-          </>
+            <>
+              <div className='mt-4 w-full rounded overflow-clip bg-gray-600'>
+                <div
+                  className='h-2 bg-green-700 rounded transition-all duration-500 shadow-md shadow-black'
+                  style={{ width: `${progressValue * 100}%` }}
+                />
+              </div>
+              <div className='mt-4'>
+                {progress.length === 0 && (
+                  <p className='py-1'>No repositories were processed.</p>
+                )}
+                {progress.map((item) => (
+                  <ProgressItem key={item.repository} item={item} />
+                ))}
+              </div>
+            </>
           )
         : <div className='mt-4 text-gray-400'>
-          <ColoredSkeleton className='mr-4 px-2' />
-        </div>
+            <ColoredSkeleton className='mr-4 px-2' />
+          </div>
       }
     </Card>
   )
@@ -280,9 +277,9 @@ const ProgressItem: FunctionComponent<{
       </span>
       {item.repositoryUrl != null
         ? (
-          <a href={item.repositoryUrl} rel='noreferrer' className='hocus:underline'>
-            {item.repository}
-          </a>
+            <a href={item.repositoryUrl} rel='noreferrer' className='hocus:underline'>
+              {item.repository}
+            </a>
           )
         : item.repository
       }

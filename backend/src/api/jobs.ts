@@ -43,12 +43,12 @@ function project (job: V1Job): JobsItem {
   const isSuccess = typeof job.status?.succeeded === 'number' && job.status.succeeded > 0
   const isActive = typeof job.status?.active === 'number' && job.status.active > 0
 
-  const isManual = job.metadata?.annotations?.[ForemanAnnotations.Manual] === 'true'
-  const repositoryScope = job.metadata?.annotations?.[ForemanAnnotations.RepositoryScope]
-  const debugLogging = job.metadata?.annotations?.[ForemanAnnotations.DebugLogging] != null
+  const isManual = job.metadata.annotations?.[ForemanAnnotations.Manual] === 'true'
+  const repositoryScope = job.metadata.annotations?.[ForemanAnnotations.RepositoryScope]
+  const debugLogging = job.metadata.annotations?.[ForemanAnnotations.DebugLogging] != null
     ? job.metadata.annotations[ForemanAnnotations.DebugLogging] === 'true'
     : undefined
-  const triggeredBy = job.metadata?.annotations?.[ForemanAnnotations.TriggeredBy] != null
+  const triggeredBy = job.metadata.annotations?.[ForemanAnnotations.TriggeredBy] != null
     ? parseLogin(job.metadata.annotations[ForemanAnnotations.TriggeredBy])
     : undefined
 
@@ -74,6 +74,7 @@ interface UserDescriptor {
 
 function parseLogin (login: string): UserDescriptor {
   const [strategy, username] = login.split(':')
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   return { strategy: strategy ?? '', username: username ?? '' }
 }
 

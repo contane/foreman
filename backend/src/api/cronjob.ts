@@ -30,7 +30,7 @@ export const cronjobRoute = ({ cronJobController }: Controllers): FastifyPluginA
 
     let nextScheduleTime: string | undefined
     if (schedule != null) {
-      const interval = cronParser.parseExpression(schedule ?? '', {
+      const interval = cronParser.parseExpression(schedule, {
         tz: typeof cronJob.spec?.timeZone === 'string' ? cronJob.spec.timeZone : undefined
       })
       nextScheduleTime = interval.next().toISOString()
