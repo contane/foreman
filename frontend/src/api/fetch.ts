@@ -35,7 +35,7 @@ export type FetchHook<T extends {}> = FetchState<T> & {
   reset: () => void
 }
 
-export function useApiFetcher <T extends {}> (): FetchHook<T> {
+export function useApiFetcher<T extends {}> (): FetchHook<T> {
   const [state, setState] = useState<FetchState<T>>({
     data: undefined,
     error: undefined
@@ -47,7 +47,10 @@ export function useApiFetcher <T extends {}> (): FetchHook<T> {
         // the response is not an error
         return await transform.transformResponse(response)
       })
-      .catch(async (error) => {
+      .catch(async (error: unknown) => {
+        if (!(error instanceof Error)) {
+          throw new Error(String(error))
+        }
         // the response is an error, but may still become a valid response via the transform
         const transformed: T | Error = transform.transformError?.(error) ?? error
         if (transformed instanceof Error) {
@@ -64,13 +67,13 @@ export function useApiFetcher <T extends {}> (): FetchHook<T> {
           error: undefined
         }))
       })
-      .catch(async (error) => {
+      .catch(async (error: unknown) => {
         // all transforms are applied and the response is an error
         if (signal?.aborted === true) return
         setState((state) => ({
           ...state,
           data: undefined,
-          error
+          error: error instanceof Error ? error : new Error(String(error))
         }))
       })
       .finally(() => {

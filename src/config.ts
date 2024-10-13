@@ -143,7 +143,7 @@ export function createConfig (...configFiles: unknown[]): Config {
   const merged = deepmerge.all([defaultConfig, ...values], {
     // arrays are overwritten completely, instead of joined
     arrayMerge: (dst: any[], src: any[]) => src,
-    isMergeableObject: (value) => typeof value === 'object' && value != null && !Buffer.isBuffer(value)
+    isMergeableObject: (value: unknown) => typeof value === 'object' && value != null && !Buffer.isBuffer(value)
   })
 
   return configSchema.create(merged)

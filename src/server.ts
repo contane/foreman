@@ -29,7 +29,7 @@ export async function startServer (options: {
     index: 'index.html',
     setHeaders: (res) => {
       // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
-      void res.setHeader('Content-Security-Policy', "default-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
+      void res.setHeader('Content-Security-Policy', 'default-src \'self\'; connect-src \'self\'; frame-ancestors \'none\'; base-uri \'self\'; form-action \'self\'')
       // https://infosec.mozilla.org/guidelines/web_security#x-frame-options
       void res.setHeader('X-Frame-Options', 'DENY')
       // https://infosec.mozilla.org/guidelines/web_security#x-content-type-options

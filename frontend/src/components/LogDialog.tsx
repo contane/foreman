@@ -84,7 +84,7 @@ const LogDisplay: FunctionComponent<{
   useLayoutEffect(() => {
     if (props.follow) {
       logElement.current?.scrollTo({
-        top: logElement.current?.scrollHeight
+        top: logElement.current.scrollHeight
       })
     }
   }, [props.follow, logs])

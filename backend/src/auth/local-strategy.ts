@@ -50,7 +50,7 @@ export async function makeLocalStrategy (adminUser: {
         return
       }
       done(null, false)
-    }).catch(done)
+    }).catch((err: unknown) => done(err))
   })
 }
 

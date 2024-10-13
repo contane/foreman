@@ -13,7 +13,7 @@ export type ApiDispatchHook<T extends {}, Args extends unknown[]> = FetchState<T
  * @param route The route to dispatch to.
  * @returns An object with a dispatch method, and the current state of the request.
  */
-export function useApiDispatch <T extends {}, Args extends unknown[]> (route: ApiRoute<T, Args>): ApiDispatchHook<T, Args> {
+export function useApiDispatch<T extends {}, Args extends unknown[]> (route: ApiRoute<T, Args>): ApiDispatchHook<T, Args> {
   const fetcher = useApiFetcher<T>()
   const [inProgress, setInProgress] = useState(false)
 

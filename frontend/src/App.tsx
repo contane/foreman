@@ -13,7 +13,6 @@ import { Jobs } from './pages/Jobs.js'
 import clsx from 'clsx'
 import Icon from './components/Icon.js'
 import { faChevronDown, faChevronUp, faPaintRoller } from '@fortawesome/free-solid-svg-icons'
-import { ColoredSkeleton } from './components/ColoredSkeleton.js'
 import { useMobileNavigation } from './util/navigation.js'
 
 export const App: FunctionComponent = () => {
@@ -56,7 +55,7 @@ export const App: FunctionComponent = () => {
               'absolute top-3 right-4 rounded border-2 border-white/25 hocus:border-white/50 p-2 leading-none',
               isMobileNavigation ? 'block' : 'hidden'
             )}
-            onClick={() => setAsideExpanded(state => !state)}
+            onClick={() => setAsideExpanded((state) => !state)}
           >
             <Icon icon={asideExpanded ? faChevronUp : faChevronDown} />
           </button>
@@ -64,9 +63,9 @@ export const App: FunctionComponent = () => {
             <div className={clsx('mt-4', isMobileNavigation && !asideExpanded ? 'hidden' : 'block')}>
               <Navigation onNavigate={() => setAsideExpanded(false)} />
               <div className='my-4'>
-                {!loading ? <span>Logged in as: {userInfo?.username} ({userInfo?.strategy} login)</span> : <ColoredSkeleton />}
+                <span>Logged in as: {userInfo?.username} ({userInfo?.strategy} login)</span>
               </div>
-              <Button onClick={dispatchLogout} disabled={loading || logoutInProgress}>
+              <Button onClick={dispatchLogout} disabled={logoutInProgress}>
                 Logout
               </Button>
             </div>

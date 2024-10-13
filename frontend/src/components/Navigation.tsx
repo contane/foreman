@@ -46,19 +46,19 @@ const NavigationJobsSection: FunctionComponent<{
           <JobNavigationItem key={`${job.namespace}/${job.name}`} name={job.name} namespace={job.namespace} status={job.status} startTime={job.startTime} manual={job.manual} onNavigate={props.onNavigate} />
         ))
         : [...Array(JOB_HISTORY_LIMIT)].map((_, i) => (
-          <JobNavigationItem key={i} name={undefined} namespace={undefined} status={undefined} startTime={undefined} manual={false} />
+            <JobNavigationItem key={i} name={undefined} namespace={undefined} status={undefined} startTime={undefined} manual={false} />
           ))
       }
       {!loading
         ? (
-          <NavigationItem to='/jobs' onNavigate={props.onNavigate}>
-            View all jobs {jobs != null ? `(${jobs.length})` : ''}
-          </NavigationItem>
+            <NavigationItem to='/jobs' onNavigate={props.onNavigate}>
+              View all jobs {jobs != null ? `(${jobs.length})` : ''}
+            </NavigationItem>
           )
         : (
-          <div className='block mb-2 px-4 py-2 border-2 border-transparent rounded bg-[#43454a] hocus:border-[#fff4]'>
-            <ColoredSkeleton />
-          </div>
+            <div className='block mb-2 px-4 py-2 border-2 border-transparent rounded bg-[#43454a] hocus:border-[#fff4]'>
+              <ColoredSkeleton />
+            </div>
           )}
     </>
   )

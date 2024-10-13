@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "build": "vite build",
-    "lint": "tsc --noEmit -p tsconfig.lint.json && eslint --ignore-path .gitignore ."
+    "lint": "tsc --noEmit -p tsconfig.lint.json && eslint .",
+    "lint-fix": "tsc --noEmit -p tsconfig.lint.json && eslint --fix ."
   },
   "devDependencies": {
     "@types/luxon": "3.4.2",

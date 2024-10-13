@@ -105,9 +105,9 @@ export class KubernetesApi {
     env: Record<string, string>
   }): Promise<V1Job> {
     assert.ok(options.cronJob.metadata?.namespace != null)
-    assert.ok(options.cronJob.metadata?.name != null)
+    assert.ok(options.cronJob.metadata.name != null)
     const { name, namespace } = options.cronJob.metadata
-    assert.ok(options.cronJob.spec?.jobTemplate?.metadata != null)
+    assert.ok(options.cronJob.spec?.jobTemplate.metadata != null)
     this.log.info({
       options: {
         namespace,
@@ -167,7 +167,7 @@ function applyMetadataName (jobBody: k8s.V1Job, name: string): k8s.V1Job {
 }
 
 function applyEnvToJobContainers (jobBody: k8s.V1Job, env: Record<string, string>): k8s.V1Job {
-  if (jobBody.spec?.template?.spec?.containers == null) {
+  if (jobBody.spec?.template.spec?.containers == null) {
     // No containers to apply env to
     return jobBody
   }
@@ -202,7 +202,7 @@ function applyTtl (jobBody: k8s.V1Job, ttlSecondsAfterFinished: number): k8s.V1J
   }
 }
 
-function mergeEnv (env: V1EnvVar[], newEnv: Record<string, string>): V1EnvVar[] {
+function mergeEnv (env: V1EnvVar[], newEnv: Partial<Record<string, string>>): V1EnvVar[] {
   // Remove env vars that will be overwritten, then add new env vars
   return env.filter((envVar) => newEnv[envVar.name] == null)
     .concat(Object.entries(newEnv).map(([name, value]) => ({ name, value })))

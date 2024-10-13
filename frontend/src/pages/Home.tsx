@@ -74,19 +74,19 @@ const JobsSection: FunctionComponent = () => {
           <JobPanel key={`${job.namespace}/${job.name}`} name={job.name} namespace={job.namespace} status={job.status} startTime={job.startTime} manual={job.manual} />
         ))
         : [...Array(JOB_HISTORY_LIMIT)].map((_, i) => (
-          <JobPanel key={i} name={undefined} namespace={undefined} status={undefined} startTime={undefined} manual={false} />
+            <JobPanel key={i} name={undefined} namespace={undefined} status={undefined} startTime={undefined} manual={false} />
           ))
       }
       {!loading
         ? (
-          <Link to='/jobs' className='block mb-2 p-4 bg-[#2b2d30] border-2 border-[#43454a] rounded hocus:border-[#fff4]'>
-            View all jobs ({jobs?.length})
-          </Link>
+            <Link to='/jobs' className='block mb-2 p-4 bg-[#2b2d30] border-2 border-[#43454a] rounded hocus:border-[#fff4]'>
+              View all jobs ({jobs?.length})
+            </Link>
           )
         : (
-          <div className='block mb-2 px-4 py-2 border-2 border-transparent rounded bg-[#43454a] hocus:border-[#fff4]'>
-            <ColoredSkeleton />
-          </div>
+            <div className='block mb-2 px-4 py-2 border-2 border-transparent rounded bg-[#43454a] hocus:border-[#fff4]'>
+              <ColoredSkeleton />
+            </div>
           )}
     </>
   )

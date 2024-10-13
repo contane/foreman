@@ -19,7 +19,7 @@ export type TriggerJobOptions = TriggerRoute['Body']
 const route = <T extends {}, Args extends unknown[]> (route: ApiRoute<T, Args>): ApiRoute<T, Args> => route
 
 export const api = {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+
   userInfo: route({
     request: () => ({ url: 'auth/me' }),
     transformResponse: async (response): Promise<MeRoute['Reply'] | false> => await response.json(),

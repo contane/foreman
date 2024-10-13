@@ -20,7 +20,8 @@
   },
   "scripts": {
     "build": "node -e \"fs.rmSync('./dist',{force:true,recursive:true})\" && tsc",
-    "lint": "tsc --noEmit -p tsconfig.lint.json && eslint --ignore-path .gitignore .",
+    "lint": "tsc --noEmit -p tsconfig.lint.json && eslint .",
+    "lint-fix": "tsc --noEmit -p tsconfig.lint.json && eslint --fix .",
     "test": "mocha --require tsx --recursive \"test/**/*.ts\""
   },
   "dependencies": {
