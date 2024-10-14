@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.3](https://github.com/contane/foreman/compare/v0.4.2...v0.4.3) (2024-10-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yaml to v2.6.0 ([#142](https://github.com/contane/foreman/issues/142)) ([79c46c1](https://github.com/contane/foreman/commit/79c46c189416e4724987e92a189595c143bc72b9))
+* **deps:** Update Fastify to v5 ([#140](https://github.com/contane/foreman/issues/140)) ([58643d5](https://github.com/contane/foreman/commit/58643d5dc401d3156d32cd0ab10820c91c5f63b1))
+* Update ESLint to v9, update config, and fix new lint errors ([#144](https://github.com/contane/foreman/issues/144)) ([b0bec98](https://github.com/contane/foreman/commit/b0bec9803b0a5e1cecb2503ffff79be6570c63cc))
+
 ## [0.4.2](https://github.com/contane/foreman/compare/v0.4.1...v0.4.2) (2024-10-12)
 
 
