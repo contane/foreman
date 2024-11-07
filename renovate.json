@@ -18,6 +18,13 @@
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "dev dependencies (non-major)",
       "groupSlug": "dev-dependencies-non-major"
+    },
+    {
+      "matchDatasources": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "dependencies (non-major)",
+      "groupSlug": "dependencies-non-major"
     }
   ]
 }
