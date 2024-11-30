@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.4.3](https://github.com/contane/foreman/compare/v0.4.2...v0.4.3) (2024-11-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependencies (non-major) ([#160](https://github.com/contane/foreman/issues/160)) ([c8a9ecb](https://github.com/contane/foreman/commit/c8a9ecbf1c49f23524cc0cd3fd8f6715577c43dd))
+* **deps:** update dependencies (non-major) ([#167](https://github.com/contane/foreman/issues/167)) ([048396e](https://github.com/contane/foreman/commit/048396e597e7fc376250d40a5766e21066593106))
+* **deps:** update dependency @kubernetes/client-node to v0.22.2 ([#147](https://github.com/contane/foreman/issues/147)) ([7fa7fd0](https://github.com/contane/foreman/commit/7fa7fd05c192a5f9ec098b784075d4625391ecbf))
+* **deps:** update dependency pino-pretty to v12 ([#161](https://github.com/contane/foreman/issues/161)) ([ee2985a](https://github.com/contane/foreman/commit/ee2985a6d2931022ea335505d347b6f2db30b542))
+* **deps:** update dependency pino-pretty to v13 ([#163](https://github.com/contane/foreman/issues/163)) ([e71806d](https://github.com/contane/foreman/commit/e71806d289847c3bc067b3c61af8d186931ae08e))
+* **deps:** update dependency react-router-dom to v7 ([#170](https://github.com/contane/foreman/issues/170)) ([bc841bf](https://github.com/contane/foreman/commit/bc841bfb5af906e4fed3aa04a73d6ae20fa07af0))
+* **deps:** update dependency secure-json-parse to v3 ([#166](https://github.com/contane/foreman/issues/166)) ([befa477](https://github.com/contane/foreman/commit/befa4771b92449737d22a610be2c1acf7f303aba))
+* **deps:** update dependency secure-json-parse to v3 ([#172](https://github.com/contane/foreman/issues/172)) ([a19325d](https://github.com/contane/foreman/commit/a19325d6c79ef76d50a1fcbf1f5eff0203b86297))
+* **deps:** update dependency yaml to v2.6.0 ([#142](https://github.com/contane/foreman/issues/142)) ([79c46c1](https://github.com/contane/foreman/commit/79c46c189416e4724987e92a189595c143bc72b9))
+* **deps:** Update Fastify to v5 ([#140](https://github.com/contane/foreman/issues/140)) ([58643d5](https://github.com/contane/foreman/commit/58643d5dc401d3156d32cd0ab10820c91c5f63b1))
+* **deps:** update node.js to v20.18.1 ([#169](https://github.com/contane/foreman/issues/169)) ([f79733c](https://github.com/contane/foreman/commit/f79733c1062a3c9c4a3f444b3cdf8e675574f2ac))
+* Update ESLint to v9, update config, and fix new lint errors ([#144](https://github.com/contane/foreman/issues/144)) ([b0bec98](https://github.com/contane/foreman/commit/b0bec9803b0a5e1cecb2503ffff79be6570c63cc))
+
 ## [0.4.2](https://github.com/contane/foreman/compare/v0.4.1...v0.4.2) (2024-10-12)
 
 
