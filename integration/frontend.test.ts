@@ -16,12 +16,12 @@ describe('frontend', () => {
 
       // should set proper headers
       const { headers } = getResponse
-      assert.strictEqual(headers.get('Content-Security-Policy'), "default-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'")
+      assert.strictEqual(headers.get('Content-Security-Policy'), 'default-src \'self\'; connect-src \'self\'; frame-ancestors \'none\'; base-uri \'self\'; form-action \'self\'')
       assert.strictEqual(headers.get('X-Frame-Options'), 'DENY')
       assert.strictEqual(headers.get('X-Content-Type-Options'), 'nosniff')
       assert.strictEqual(headers.get('Referrer-Policy'), 'no-referrer')
       assert.strictEqual(headers.get('Cache-Control'), 'public, max-age=0')
-      assert.strictEqual(headers.get('Content-Type'), 'text/html; charset=UTF-8')
+      assert.strictEqual(headers.get('Content-Type')?.toLowerCase(), 'text/html; charset=utf-8')
 
       // should also respond to HEAD requests
       const headResponse = await fetch(`${origin}${path}`, { method: 'HEAD' })
@@ -59,11 +59,11 @@ describe('frontend', () => {
 
     const text = await response.text()
 
-    const stylesheet = text.match(/<link[^>]*\shref="([^"]+)"/i)
+    const stylesheet = /<link[^>]*\shref="([^"]+)"/i.exec(text)
     assert.ok(stylesheet)
     assert.match(stylesheet[1], /^\/assets\/index-.+\.css$/)
 
-    const script = text.match(/<script[^>]*\ssrc="([^"]+)"/i)
+    const script = /<script[^>]*\ssrc="([^"]+)"/i.exec(text)
     assert.ok(script)
     assert.match(script[1], /^\/assets\/index-.+\.js$/)
   })
@@ -77,7 +77,7 @@ describe('frontend', () => {
 
     const robots = await fetch(`${origin}/robots.txt`)
     assert.strictEqual(robots.status, 200)
-    assert.strictEqual(robots.headers.get('Content-Type'), 'text/plain; charset=UTF-8')
+    assert.strictEqual(robots.headers.get('Content-Type')?.toLowerCase(), 'text/plain; charset=utf-8')
     assert.strictEqual(await robots.text(), 'User-agent: *\nDisallow: /\n')
 
     const webmanifest = await fetch(`${origin}/assets/manifest.webmanifest`)
@@ -92,7 +92,7 @@ describe('frontend', () => {
       for (const path of ['/', '/index.html', '/foo', '/foo/bar', '/assets/favicon.ico']) {
         const response = await fetch(`${origin}${path}`, { method })
         assert.strictEqual(response.status, 404)
-        assert.strictEqual(response.headers.get('Content-Type'), 'application/json; charset=utf-8')
+        assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
         assert.deepStrictEqual(await response.json(), { error: 'Not Found' })
       }
     }

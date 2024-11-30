@@ -9,7 +9,7 @@ describe('/api/auth/strategies', () => {
 
     const response = await fetch(`${origin}/api/auth/strategies`, { method: 'GET' })
     assert.strictEqual(response.status, 200)
-    assert.strictEqual(response.headers.get('Content-Type'), 'application/json; charset=utf-8')
+    assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
 
     const strategies = await response.json()
     assert.deepStrictEqual(strategies, [])
@@ -34,7 +34,7 @@ describe('/api/auth/strategies', () => {
 
     const response = await fetch(`${origin}/api/auth/strategies`, { method: 'GET' })
     assert.strictEqual(response.status, 200)
-    assert.strictEqual(response.headers.get('Content-Type'), 'application/json; charset=utf-8')
+    assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
 
     const strategies = await response.json()
     assert.deepStrictEqual(strategies, ['local'])

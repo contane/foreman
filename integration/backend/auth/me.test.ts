@@ -9,7 +9,7 @@ describe('/api/auth/me', () => {
 
     const response = await fetch(`${origin}/api/auth/me`, { method: 'GET' })
     assert.strictEqual(response.status, 403)
-    assert.strictEqual(response.headers.get('Content-Type'), 'application/json; charset=utf-8')
+    assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
     assert.deepStrictEqual(await response.json(), { error: 'Forbidden' })
   })
 })

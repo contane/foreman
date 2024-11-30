@@ -10,7 +10,7 @@ describe('/api/auth/logout', () => {
     // Note: This sets a cookie, but its contents indicate a missing session.
     const response = await fetch(`${origin}/api/auth/logout`, { method: 'POST' })
     assert.strictEqual(response.status, 200)
-    assert.strictEqual(response.headers.get('Content-Type'), 'application/json; charset=utf-8')
+    assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
     // TODO set SameSite=Strict
     const setCookie = response.headers.getSetCookie()
     assert.ok(setCookie.length === 1)
@@ -63,7 +63,7 @@ describe('/api/auth/logout', () => {
       headers: { Cookie: `session=${session}` }
     })
     assert.strictEqual(logoutResponse.status, 200)
-    assert.strictEqual(logoutResponse.headers.get('Content-Type'), 'application/json; charset=utf-8')
+    assert.strictEqual(logoutResponse.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
     // TODO set SameSite=Strict
     const setCookie = logoutResponse.headers.getSetCookie()
     assert.ok(setCookie.length === 1)

@@ -9,7 +9,7 @@ describe('/api/auth/local', () => {
 
     const response = await fetch(`${origin}/api/auth/local`, { method: 'POST' })
     assert.strictEqual(response.status, 404)
-    assert.strictEqual(response.headers.get('Content-Type'), 'application/json; charset=utf-8')
+    assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
     assert.deepStrictEqual(await response.json(), { error: 'Not Found' })
   })
 
@@ -45,7 +45,7 @@ describe('/api/auth/local', () => {
       })
       assert.strictEqual(response.status, 400)
       // TODO respond with JSON instead of plain text
-      assert.strictEqual(response.headers.get('Content-Type'), 'text/plain; charset=utf-8')
+      assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'text/plain; charset=utf-8')
       assert.strictEqual(await response.text(), 'Bad Request')
     }
   })
@@ -82,7 +82,7 @@ describe('/api/auth/local', () => {
       })
       assert.strictEqual(response.status, 401)
       // TODO respond with JSON instead of plain text
-      assert.strictEqual(response.headers.get('Content-Type'), 'text/plain; charset=utf-8')
+      assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'text/plain; charset=utf-8')
       assert.deepStrictEqual(await response.text(), 'Unauthorized')
     }
   })
@@ -110,7 +110,7 @@ describe('/api/auth/local', () => {
       body: '{"username":"test-user","password":"test-password"}'
     })
     assert.strictEqual(response.status, 200)
-    assert.strictEqual(response.headers.get('Content-Type'), 'application/json; charset=utf-8')
+    assert.strictEqual(response.headers.get('Content-Type')?.toLowerCase(), 'application/json; charset=utf-8')
     // TODO set SameSite=Strict
     const setCookie = response.headers.getSetCookie()
     assert.ok(setCookie.length === 1)
