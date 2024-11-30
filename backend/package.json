@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "pino-pretty": "13.0.0",
-    "secure-json-parse": "2.7.0"
+    "secure-json-parse": "3.0.1"
   }
 }
