@@ -43,7 +43,7 @@ export const Trigger: FunctionComponent = () => {
   // redirect to job page when jobData is available
   useEffect(() => {
     if (jobData != null) {
-      navigate(`/jobs/${encodeURIComponent(jobData.namespace)}/${encodeURIComponent(jobData.name)}`)
+      void navigate(`/jobs/${encodeURIComponent(jobData.namespace)}/${encodeURIComponent(jobData.name)}`)
     }
   }, [jobData, navigate])
 

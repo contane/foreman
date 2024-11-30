@@ -76,7 +76,7 @@ const JobStatus: FunctionComponent<{
     if (props.job.settings.debugLogging != null) {
       params.set('debugLogging', props.job.settings.debugLogging.toString())
     }
-    navigate(`/trigger?${params.toString()}`)
+    void navigate(`/trigger?${params.toString()}`)
   }, [props.job, navigate])
 
   const common = (
