@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": false,
+    "inlineSourceMap": true,
     "outDir": "./dist"
   },
   "include": [

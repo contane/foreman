@@ -1,19 +1,35 @@
 # Default ignored files
-.env
-.idea
-node_modules/
-renovate.json
-.github
-README.md
+**/.DS_Store
+**/.env
+**/node_modules
+
 .gitignore
 .gitattributes
+.github
+.idea
+.vscode
+
+README.md
+CHANGELOG.md
+
+renovate.json
+.release-please-manifest.json
+release-please-config.json
+
+.dockerignore
+Dockerfile
 
 # build folders and files
-/dist
+**/dist
 .nyc_output
 /tmp
 /coverage
 /junit.xml
+
+# test folders and files
+/test
+/integration
+/backend/test
 
 # configuration
 /config

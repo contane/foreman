@@ -17,12 +17,13 @@ RUN npm run build
 FROM node:20.18.1-alpine
 WORKDIR /app
 
+RUN apk add --no-cache tini
+
 # install PRODUCTION dependencies
 COPY package*.json ./
 COPY backend/package*.json ./backend/
 COPY frontend/package*.json ./frontend/
-RUN npm ci --omit=dev
-RUN apk add --no-cache tini
+RUN npm ci --omit=dev --workspace=backend --include-workspace-root && npm cache clean --force
 
 # add the already compiled code and the default config
 # (custom config must be set via volume)
@@ -37,4 +38,4 @@ EXPOSE 8080
 
 # use tini as init process since Node.js isn't designed to be run as PID 1
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["node", "--disable-proto=delete", "dist/main.js"]
+CMD ["node", "--enable-source-maps", "--disable-proto=delete", "dist/main.js"]
