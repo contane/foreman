@@ -6,12 +6,14 @@ WORKDIR /app
 COPY package*.json ./
 COPY backend/package*.json ./backend/
 COPY frontend/package*.json ./frontend/
-RUN npm ci
+# https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#node-gyp-alpine
+RUN apk add --no-cache --virtual .gyp python3 py-setuptools make g++ \
+    && npm ci \
+    && apk del .gyp
 
 # copy in app code and build it
 COPY . .
 RUN npm run build
-
 
 # -- execution --
 FROM node:20.18.1-alpine
@@ -19,11 +21,16 @@ WORKDIR /app
 
 RUN apk add --no-cache tini
 
-# install PRODUCTION dependencies
+# install production dependencies
 COPY package*.json ./
 COPY backend/package*.json ./backend/
 COPY frontend/package*.json ./frontend/
-RUN npm ci --omit=dev --workspace=backend --include-workspace-root && npm cache clean --force
+
+# https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#node-gyp-alpine
+RUN apk add --no-cache --virtual .gyp python3 py-setuptools make g++ \
+    && npm ci --omit=dev --workspace=backend --include-workspace-root \
+    && npm cache clean --force \
+    && apk del .gyp
 
 # add the already compiled code and the default config
 # (custom config must be set via volume)
