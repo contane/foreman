@@ -57,10 +57,17 @@ For more information, refer to the [Kubernetes RBAC documentation](https://kuber
 
 ### Docker
 
-You can run Foreman via Docker using the following command:
+You can run Foreman via Docker:
 
 ```sh
-docker run -p 8080:8080 -v /path/to/config:/app/config contane/foreman:latest
+docker run --detach \
+    --restart=unless-stopped \
+    --cap-drop=all \
+    --security-opt=no-new-privileges \
+    --read-only \
+    --volume=/path/to/config:/app/config:ro \
+    -p=8080:8080/tcp \
+    contane/foreman:latest
 ```
 
 Here, `/path/to/config` is the path to the configuration directory on the host, and Foreman will be accessible on
