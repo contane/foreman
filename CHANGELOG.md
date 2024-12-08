@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.0](https://github.com/contane/foreman/compare/v0.4.3...v0.5.0) (2024-12-08)
+
+
+### Features
+
+* Optimize Docker image, build for amd64+arm64 ([#173](https://github.com/contane/foreman/issues/173)) ([8d35b6d](https://github.com/contane/foreman/commit/8d35b6ddb60301248990c0d5ff5e114d3b390079))
+
+
+### Bug Fixes
+
+* **deps:** update dependencies (non-major) ([#178](https://github.com/contane/foreman/issues/178)) ([5542721](https://github.com/contane/foreman/commit/5542721f64db99a0fa925b65999bc67cef096f41))
+* **deps:** update node.js to v22 ([#158](https://github.com/contane/foreman/issues/158)) ([2b070f1](https://github.com/contane/foreman/commit/2b070f1a31998cba34ecf72b12ae486ad6ea3618))
+
 ## [0.4.3](https://github.com/contane/foreman/compare/v0.4.2...v0.4.3) (2024-11-30)
 
 
