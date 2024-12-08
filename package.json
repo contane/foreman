@@ -33,7 +33,7 @@
     "npm": ">=9"
   },
   "devDependencies": {
-    "@eslint/compat": "1.2.3",
+    "@eslint/compat": "1.2.4",
     "@meyfa/eslint-config": "8.0.1",
     "@types/mocha": "10.0.10",
     "@types/ms": "0.7.34",
@@ -42,7 +42,7 @@
     "eslint": "9.16.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.2",
-    "eslint-plugin-react-hooks": "5.0.0",
+    "eslint-plugin-react-hooks": "5.1.0",
     "mocha": "11.0.1",
     "tsx": "4.19.2",
     "typescript": "5.7.2"
