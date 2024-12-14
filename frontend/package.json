@@ -10,8 +10,8 @@
   },
   "devDependencies": {
     "@types/luxon": "3.4.2",
-    "@types/react": "18.3.14",
-    "@types/react-dom": "18.3.2",
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.2",
     "@vitejs/plugin-react": "4.3.4",
     "autoprefixer": "10.4.20",
     "postcss": "8.4.49",
@@ -28,8 +28,8 @@
     "clsx": "2.1.1",
     "cronstrue": "2.52.0",
     "luxon": "3.5.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-loading-skeleton": "3.5.0"
   }
 }
