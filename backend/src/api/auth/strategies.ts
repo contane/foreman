@@ -1,4 +1,4 @@
-import { FastifyPluginAsync } from 'fastify'
+import type { FastifyPluginAsync } from 'fastify'
 import { AuthStrategy } from '../../auth/common.js'
 
 export interface StrategiesRoute {

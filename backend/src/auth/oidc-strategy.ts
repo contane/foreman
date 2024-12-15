@@ -1,8 +1,8 @@
-import { custom, Issuer, Strategy as OpenIdStrategy, TokenSet, UserinfoResponse } from 'openid-client'
-import { AuthStrategy, User } from './common.js'
-import { AuthenticateOptions } from '@fastify/passport/dist/AuthenticationRoute.js'
-import { RouteHandlerMethod } from 'fastify'
-import fastifyPassport from '@fastify/passport'
+import { custom, Issuer, Strategy as OpenIdStrategy, TokenSet, type UserinfoResponse } from 'openid-client'
+import { AuthStrategy, type User } from './common.js'
+import type { AuthenticateOptions } from '@fastify/passport/dist/AuthenticationRoute.js'
+import type { RouteHandlerMethod } from 'fastify'
+import { fastifyPassport } from '../fastifyPassport.js'
 
 export const authenticateOidc = (options?: AuthenticateOptions): RouteHandlerMethod => fastifyPassport.authenticate(AuthStrategy.OIDC, options)
 

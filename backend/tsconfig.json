@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "lib": ["ES2022"],
-    "module": "ES2022",
+    "module": "NodeNext",
     "target": "ES2022",
-    "moduleResolution": "Node",
+    "moduleResolution": "nodenext",
     "strict": true,
     "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,

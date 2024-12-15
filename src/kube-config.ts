@@ -1,6 +1,6 @@
 import k8s from '@kubernetes/client-node'
-import { Config } from './config.js'
-import { BaseLogger } from 'pino'
+import type { Config } from './config.js'
+import type { BaseLogger } from 'pino'
 
 export function loadKubeConfig (log: BaseLogger, config: Config): k8s.KubeConfig {
   const from = config.kubeConfig.source

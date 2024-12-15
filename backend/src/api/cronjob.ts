@@ -1,5 +1,5 @@
-import { FastifyPluginAsync } from 'fastify'
-import { Controllers } from '../controllers.js'
+import type { FastifyPluginAsync } from 'fastify'
+import type { Controllers } from '../controllers.js'
 import cronParser from 'cron-parser'
 import { forbidden, notFound } from './errors.js'
 import { authenticateSession } from '../auth/common.js'

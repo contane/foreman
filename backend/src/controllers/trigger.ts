@@ -1,10 +1,10 @@
-import { KubernetesApi } from '../kubernetes/api.js'
-import { CronJobController } from './cronjob.js'
+import type { KubernetesApi } from '../kubernetes/api.js'
+import type { CronJobController } from './cronjob.js'
 import assert from 'node:assert'
 import { randomBytes } from 'node:crypto'
-import { V1Job } from '@kubernetes/client-node'
+import type { V1Job } from '@kubernetes/client-node'
 import { ForemanAnnotations, ForemanLabels } from '../metadata.js'
-import { JobController } from './job.js'
+import type { JobController } from './job.js'
 
 export class TriggerController {
   constructor (

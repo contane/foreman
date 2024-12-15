@@ -4,7 +4,7 @@ import { PodController } from './controllers/pod.js'
 import { KubernetesApi } from './kubernetes/api.js'
 import { LogsController } from './controllers/logs.js'
 import { TriggerController } from './controllers/trigger.js'
-import { BackendConfig } from './index.js'
+import type { BackendConfig } from './index.js'
 
 export interface Controllers {
   cronJobController: CronJobController

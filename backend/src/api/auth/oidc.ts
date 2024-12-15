@@ -1,4 +1,4 @@
-import { FastifyPluginAsync } from 'fastify'
+import type { FastifyPluginAsync } from 'fastify'
 import { authenticateOidc } from '../../auth/oidc-strategy.js'
 import { AuthStrategy } from '../../auth/common.js'
 

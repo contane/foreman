@@ -1,4 +1,4 @@
-import { FastifyPluginAsync } from 'fastify'
+import type { FastifyPluginAsync } from 'fastify'
 import { forbidden } from '../errors.js'
 import { authenticateSession } from '../../auth/common.js'
 

@@ -1,9 +1,9 @@
-import { FastifyPluginAsync } from 'fastify'
-import { Controllers } from '../controllers.js'
+import type { FastifyPluginAsync } from 'fastify'
+import type { Controllers } from '../controllers.js'
 import { forbidden, notFound } from './errors.js'
 import { authenticateSession } from '../auth/common.js'
-import { extractProgress, ProgressItem } from '../renovate/progress.js'
-import { BackendConfig } from '../backend-config.js'
+import { extractProgress, type ProgressItem } from '../renovate/progress.js'
+import type { BackendConfig } from '../backend-config.js'
 
 export interface PodProgressRoute {
   Reply: ProgressItem[]

@@ -1,4 +1,4 @@
-import { FastifyReply } from 'fastify'
+import type { FastifyReply } from 'fastify'
 
 export async function badRequest (reply: FastifyReply): Promise<FastifyReply> {
   return await reply.code(400).send({ error: 'Bad Request' })
