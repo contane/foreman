@@ -1,5 +1,5 @@
-import { RouteHandlerMethod } from 'fastify'
-import fastifyPassport from '@fastify/passport'
+import type { RouteHandlerMethod } from 'fastify'
+import { fastifyPassport } from '../fastifyPassport.js'
 
 export enum AuthStrategy {
   LOCAL = 'local',

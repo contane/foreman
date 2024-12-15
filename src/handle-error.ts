@@ -1,4 +1,4 @@
-import { FastifyError, FastifyReply } from 'fastify'
+import type { FastifyError, FastifyReply } from 'fastify'
 import { badRequest, internalServerError, payloadTooLarge, unsupportedMediaType } from 'backend'
 
 /**

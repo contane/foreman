@@ -1,8 +1,8 @@
-import { CronJobController } from './cronjob.js'
-import { KubernetesApi } from '../kubernetes/api.js'
+import type { CronJobController } from './cronjob.js'
+import type { KubernetesApi } from '../kubernetes/api.js'
 import assert from 'node:assert'
 import { StrongCache } from '../util/cache.js'
-import { V1CronJob, V1Job } from '@kubernetes/client-node'
+import type { V1CronJob, V1Job } from '@kubernetes/client-node'
 import { ForemanLabels } from '../metadata.js'
 
 export class JobController {

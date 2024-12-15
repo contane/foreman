@@ -1,5 +1,5 @@
-import { KubernetesApi } from '../kubernetes/api.js'
-import { PodController } from './pod.js'
+import type { KubernetesApi } from '../kubernetes/api.js'
+import type { PodController } from './pod.js'
 import { WeakCache } from '../util/cache.js'
 import { Mutex } from '../util/mutex.js'
 

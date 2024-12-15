@@ -1,8 +1,8 @@
-import pino from 'pino'
+import { pino } from 'pino'
 import { KubernetesApi } from '../../src/kubernetes/api.js'
 import { HttpError, KubeConfig, V1CronJob } from '@kubernetes/client-node'
 import assert from 'node:assert'
-import { fastify, FastifyInstance } from 'fastify'
+import { fastify, type FastifyInstance } from 'fastify'
 
 function assertEqualResources (actual: any, expected: any): void {
   // Check for deep strict equality but ignore undefined values

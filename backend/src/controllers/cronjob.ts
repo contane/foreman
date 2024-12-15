@@ -1,6 +1,6 @@
 import { KubernetesApi } from '../kubernetes/api.js'
 import { StrongCache } from '../util/cache.js'
-import { BackendConfig } from '../index.js'
+import type { BackendConfig } from '../index.js'
 import { V1CronJob } from '@kubernetes/client-node'
 
 export class CronJobController {

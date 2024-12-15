@@ -1,4 +1,4 @@
-import { fastify, FastifyInstance } from 'fastify'
+import { fastify, type FastifyInstance } from 'fastify'
 import { makeOidcStrategy } from '../../src/auth/oidc-strategy.js'
 import assert from 'node:assert'
 import { Strategy } from 'openid-client'

@@ -2,7 +2,7 @@ import {
   coerce,
   defaulted,
   enums,
-  Infer,
+  type Infer,
   instance,
   integer,
   literal,

@@ -1,8 +1,8 @@
-import { FastifyPluginAsync } from 'fastify'
-import { Controllers } from '../controllers.js'
+import type { FastifyPluginAsync } from 'fastify'
+import type { Controllers } from '../controllers.js'
 import { forbidden, notFound } from './errors.js'
 import { authenticateSession } from '../auth/common.js'
-import { V1Pod } from '@kubernetes/client-node'
+import type { V1Pod } from '@kubernetes/client-node'
 import assert from 'node:assert'
 import { DEFAULT_NAMESPACE } from '../kubernetes/api.js'
 

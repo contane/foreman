@@ -1,9 +1,9 @@
 import { Strategy as LocalStrategy } from 'passport-local'
-import crypto, { BinaryLike, timingSafeEqual } from 'node:crypto'
+import crypto, { type BinaryLike, timingSafeEqual } from 'node:crypto'
 import { Mutex } from '../util/mutex.js'
-import { AuthStrategy, User } from './common.js'
-import { RouteHandlerMethod } from 'fastify'
-import fastifyPassport from '@fastify/passport'
+import { AuthStrategy, type User } from './common.js'
+import type { RouteHandlerMethod } from 'fastify'
+import { fastifyPassport } from '../fastifyPassport.js'
 import { promisify } from 'node:util'
 
 export const authenticateLocal = (): RouteHandlerMethod => fastifyPassport.authenticate(AuthStrategy.LOCAL)

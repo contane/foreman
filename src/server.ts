@@ -3,9 +3,9 @@ import { backend, notFound } from 'backend'
 
 import { fastifyStatic } from '@fastify/static'
 import path from 'node:path'
-import { fastify, FastifyBaseLogger } from 'fastify'
-import { Config } from './config.js'
-import { KubeConfig } from '@kubernetes/client-node'
+import { fastify, type FastifyBaseLogger } from 'fastify'
+import type { Config } from './config.js'
+import type { KubeConfig } from '@kubernetes/client-node'
 import { handleError } from './handle-error.js'
 
 type CloseFunction = () => Promise<void>

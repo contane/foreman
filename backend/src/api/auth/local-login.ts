@@ -1,5 +1,5 @@
-import { FastifyPluginAsync } from 'fastify'
-import { authenticateLocal, LocalStrategyRequestBody } from '../../auth/local-strategy.js'
+import type { FastifyPluginAsync } from 'fastify'
+import { authenticateLocal, type LocalStrategyRequestBody } from '../../auth/local-strategy.js'
 
 export interface LocalLoginRoute {
   Body: LocalStrategyRequestBody

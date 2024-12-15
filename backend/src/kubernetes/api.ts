@@ -1,6 +1,6 @@
-import k8s, { HttpError, V1CronJob, V1EnvVar, V1Job, V1Pod } from '@kubernetes/client-node'
+import k8s, { HttpError, type V1CronJob, type V1EnvVar, type V1Job, type V1Pod } from '@kubernetes/client-node'
 import assert from 'node:assert'
-import { BaseLogger } from 'pino'
+import type { BaseLogger } from 'pino'
 
 export const DEFAULT_NAMESPACE = 'default'
 

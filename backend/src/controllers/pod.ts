@@ -1,8 +1,8 @@
-import { KubernetesApi } from '../kubernetes/api.js'
-import { JobController } from './job.js'
+import type { KubernetesApi } from '../kubernetes/api.js'
+import type { JobController } from './job.js'
 import { StrongCache } from '../util/cache.js'
 import assert from 'node:assert'
-import { V1Pod } from '@kubernetes/client-node'
+import type { V1Pod } from '@kubernetes/client-node'
 
 export class PodController {
   private readonly cache = new StrongCache<V1Pod[]>(5000)
