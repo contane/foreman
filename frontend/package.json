@@ -20,8 +20,8 @@
     "vite-plugin-favicons-inject": "2.2.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "6.7.1",
-    "@fortawesome/free-solid-svg-icons": "6.7.1",
+    "@fortawesome/fontawesome-svg-core": "6.7.2",
+    "@fortawesome/free-solid-svg-icons": "6.7.2",
     "@fortawesome/react-fontawesome": "0.2.2",
     "@headlessui/react": "2.2.0",
     "@uidotdev/usehooks": "2.4.1",
