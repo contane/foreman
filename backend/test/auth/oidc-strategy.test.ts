@@ -1,7 +1,9 @@
 import { fastify, type FastifyInstance } from 'fastify'
 import { makeOidcStrategy } from '../../src/auth/oidc-strategy.js'
 import assert from 'node:assert'
-import { Strategy } from 'openid-client'
+import { Strategy as OpenIdStrategy } from 'openid-client/passport'
+import { Authenticator } from '../../src/fastifyPassport.js'
+import { AuthStrategy } from '../../src/auth/common.js'
 
 describe('auth/oidc-strategy.ts', () => {
   describe('makeOidcStrategy()', () => {
@@ -24,10 +26,26 @@ describe('auth/oidc-strategy.ts', () => {
         issuer: 'http://127.0.0.1:58080',
         clientId: 'foobar',
         clientSecret: 'bazqux',
-        redirectUri: 'http://localhost:3000/oidc/callback'
+        redirectUri: 'http://localhost:3000/oidc/callback',
+        allowInsecureRequests: true
       })
-      assert.ok(strategy instanceof Strategy)
+      assert.ok(strategy instanceof OpenIdStrategy)
       assert.ok(called)
+    })
+
+    it('disallows insecure requests by default', async () => {
+      try {
+        await makeOidcStrategy({
+          issuer: 'http://127.0.0.1:58080',
+          clientId: 'foobar',
+          clientSecret: 'bazqux',
+          redirectUri: 'http://localhost:3000/oidc/callback'
+        })
+      } catch (err: unknown) {
+        assert.ok(err != null && (err as any).message.toLowerCase().includes('https'))
+        return
+      }
+      assert.fail('Expected an error')
     })
 
     it('accepts issuer URL with full .well-known path', async () => {
@@ -42,9 +60,10 @@ describe('auth/oidc-strategy.ts', () => {
         issuer: 'http://127.0.0.1:58080/.well-known/openid-configuration',
         clientId: 'foobar',
         clientSecret: 'bazqux',
-        redirectUri: 'http://localhost:3000/oidc/callback'
+        redirectUri: 'http://localhost:3000/oidc/callback',
+        allowInsecureRequests: true
       })
-      assert.ok(strategy instanceof Strategy)
+      assert.ok(strategy instanceof OpenIdStrategy)
       assert.ok(called)
     })
 
@@ -61,25 +80,36 @@ describe('auth/oidc-strategy.ts', () => {
         }
       })
       await app.listen({ host: '127.0.0.1', port: 58080 })
-      const strategy = await makeOidcStrategy({
+      const passport = new Authenticator()
+      passport.use(await makeOidcStrategy({
         issuer: 'http://127.0.0.1:58080',
         clientId: 'foobar',
         clientSecret: 'bazqux',
-        redirectUri: 'http://localhost:3000/oidc/callback'
-      })
+        redirectUri: 'http://localhost:3000/oidc/callback',
+        allowInsecureRequests: true
+      }) as any)
+      const strategy = passport.strategy(AuthStrategy.OIDC)
+      assert.ok(strategy != null)
       const mockRequest = {
         method: 'GET',
         url: '/',
         body: {},
-        session: {}
+        session: {},
+        res: {
+          redirect: (url: string) => {
+            assert.fail(`Unexpected redirect to ${url}`)
+          },
+          status: (code: number) => {
+            assert.fail(`Unexpected status code ${code}`)
+          }
+        }
       }
       const promise = new Promise<void>((resolve, reject) => {
-        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-        strategy.error = (err: any) => reject(err)
-        strategy.fail = () => reject(new Error('should not have failed'))
-        strategy.success = () => reject(new Error('should not have succeeded'))
-        strategy.pass = () => reject(new Error('should not have passed'))
-        strategy.redirect = (url: string) => {
+        (strategy as any).error = () => reject(new Error('should not have errored'));
+        (strategy as any).fail = () => reject(new Error('should not have failed'));
+        (strategy as any).success = () => reject(new Error('should not have succeeded'));
+        (strategy as any).pass = () => reject(new Error('should not have passed'));
+        (strategy as any).redirect = (url: string) => {
           const urlObj = new URL(url)
           assert.strictEqual(urlObj.origin, 'http://127.0.0.1:58080')
           assert.strictEqual(urlObj.pathname, '/authorize')
@@ -89,7 +119,7 @@ describe('auth/oidc-strategy.ts', () => {
           resolve()
         }
       })
-      strategy.authenticate(mockRequest as any)
+      strategy.authenticate.call(strategy as any, mockRequest as any, {})
       await promise
     })
   })
