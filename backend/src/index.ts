@@ -1,4 +1,4 @@
-import k8s from '@kubernetes/client-node'
+import type { KubeConfig } from '@kubernetes/client-node'
 import { KubernetesApi } from './kubernetes/api.js'
 import { cronjobRoute } from './api/cronjob.js'
 import { podLogsRoute } from './api/pod-logs.js'
@@ -25,7 +25,7 @@ import type { BackendConfig } from './backend-config.js'
 export type { BackendConfig } from './backend-config.js'
 export * from './api/errors.js'
 
-export const backend = (kubeConfig: k8s.KubeConfig, config: BackendConfig): FastifyPluginAsync => async (app) => {
+export const backend = (kubeConfig: KubeConfig, config: BackendConfig): FastifyPluginAsync => async (app) => {
   // Note: NEVER log the config here, as it contains the admin password!
   app.log.info('backend_init')
 

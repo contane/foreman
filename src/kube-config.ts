@@ -1,8 +1,8 @@
-import k8s from '@kubernetes/client-node'
+import { KubeConfig } from '@kubernetes/client-node'
 import type { Config } from './config.js'
 import type { BaseLogger } from 'pino'
 
-export function loadKubeConfig (log: BaseLogger, config: Config): k8s.KubeConfig {
+export function loadKubeConfig (log: BaseLogger, config: Config): KubeConfig {
   const from = config.kubeConfig.source
   log.info('kubeconfig_load', { from })
 
@@ -24,8 +24,8 @@ export function loadKubeConfig (log: BaseLogger, config: Config): k8s.KubeConfig
   return kubeConfig
 }
 
-function kubeConfigFromSource (source: Config['kubeConfig']['source']): k8s.KubeConfig {
-  const kubeConfig = new k8s.KubeConfig()
+function kubeConfigFromSource (source: Config['kubeConfig']['source']): KubeConfig {
+  const kubeConfig = new KubeConfig()
 
   switch (source) {
     case 'file':
@@ -37,7 +37,7 @@ function kubeConfigFromSource (source: Config['kubeConfig']['source']): k8s.Kube
   }
 }
 
-function validateKubeConfig (kubeConfig: k8s.KubeConfig): void {
+function validateKubeConfig (kubeConfig: KubeConfig): void {
   if (kubeConfig.getCurrentCluster() == null) {
     throw new Error('No current cluster in kubeconfig')
   }

@@ -59,7 +59,7 @@ function getTestKubeConfig (): KubeConfig {
     clusters: [
       {
         name: 'test-cluster',
-        server: `http://127.0.0.1:${testClusterPort}`
+        server: `https://127.0.0.1:${testClusterPort}`
       }
     ],
     contexts: [
