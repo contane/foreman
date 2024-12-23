@@ -1,14 +1,60 @@
 import { pino } from 'pino'
 import { KubernetesApi } from '../../src/kubernetes/api.js'
-import { HttpError, KubeConfig, V1CronJob } from '@kubernetes/client-node'
+import { ApiException, KubeConfig, V1CronJob } from '@kubernetes/client-node'
 import assert from 'node:assert'
 import { fastify, type FastifyInstance } from 'fastify'
+import { readFile } from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
+import path, { dirname } from 'node:path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+const TLS_CERT_PATH = path.join(__dirname, '..', 'fixtures', 'cert.pem')
+const TLS_KEY_PATH = path.join(__dirname, '..', 'fixtures', 'key.pem')
+
+const TEST_TOKEN = 'foreman-k8s-token'
 
 function assertEqualResources (actual: any, expected: any): void {
   // Check for deep strict equality but ignore undefined values
   const a = JSON.parse(JSON.stringify(actual))
   const e = JSON.parse(JSON.stringify(expected))
   assert.deepStrictEqual(a, e)
+}
+
+function assertNoSensitiveData (thing: unknown): void {
+  const seen = new Set()
+
+  // Recursively check for sensitive data in an object/array.
+  // Specifically, this looks for the Authorization header and its value.
+  const recurse = (value: unknown, path: string): void => {
+    if (seen.has(value)) {
+      return
+    }
+    seen.add(value)
+    if (typeof value === 'object' && value != null) {
+      for (const key in value) {
+        if (key.toLowerCase() === 'authorization') {
+          assert.fail(`Sensitive data found at ${path}.${key}`)
+        }
+        recurse((value as any)[key], `${path}.${key}`)
+      }
+    } else if (Array.isArray(value)) {
+      value.forEach((item, i) => recurse(item, `${path}[${i}]`))
+    } else if (typeof value === 'string') {
+      if (value.toLowerCase().includes('authorization') || value.includes(TEST_TOKEN)) {
+        assert.fail(`Sensitive data found at ${path}`)
+      }
+    }
+  }
+
+  recurse(thing, '')
+
+  // Be extra sure by checking the stringified version for the auth token
+  const str = JSON.stringify(thing)
+  if (str.includes(TEST_TOKEN)) {
+    assert.fail('Sensitive data found in stringified object')
+  }
 }
 
 describe('kubernetes/api.ts', () => {
@@ -22,7 +68,8 @@ describe('kubernetes/api.ts', () => {
       clusters: [
         {
           name: 'test-cluster',
-          server: `http://127.0.0.1:${testPort}`
+          server: `https://127.0.0.1:${testPort}`,
+          skipTLSVerify: true
         }
       ],
       contexts: [
@@ -34,7 +81,8 @@ describe('kubernetes/api.ts', () => {
       ],
       users: [
         {
-          name: 'test-user'
+          name: 'test-user',
+          token: TEST_TOKEN
         }
       ],
       currentContext: 'test-context'
@@ -49,7 +97,12 @@ describe('kubernetes/api.ts', () => {
 
     async function mockApi (registerRoutes: (app: FastifyInstance) => void): Promise<void> {
       assert.strictEqual(_mockApi, undefined, 'mockApi() called twice')
-      _mockApi = fastify()
+      _mockApi = fastify({
+        https: {
+          cert: await readFile(TLS_CERT_PATH, 'utf8'),
+          key: await readFile(TLS_KEY_PATH, 'utf8')
+        }
+      })
       registerRoutes(_mockApi)
       await _mockApi.listen({ host: '127.0.0.1', port: testPort })
     }
@@ -94,9 +147,8 @@ describe('kubernetes/api.ts', () => {
           await api.getCronJob({ namespace: 'test-ns', name: 'test-cronjob' })
           assert.fail('Expected an error')
         } catch (err) {
-          assert.ok(err instanceof HttpError)
-          assert.deepStrictEqual(Object.keys(err), ['response', 'body', 'statusCode', 'name'])
-          assert.strictEqual(err.response, undefined)
+          assertNoSensitiveData(err)
+          assert.ok(err instanceof ApiException, 'Expected an ApiException')
         }
       })
     })
@@ -144,9 +196,8 @@ describe('kubernetes/api.ts', () => {
           await api.getJobs({ namespace: 'test-ns' })
           assert.fail('Expected an error')
         } catch (err) {
-          assert.ok(err instanceof HttpError)
-          assert.deepStrictEqual(Object.keys(err), ['response', 'body', 'statusCode', 'name'])
-          assert.strictEqual(err.response, undefined)
+          assertNoSensitiveData(err)
+          assert.ok(err instanceof ApiException, 'Expected an ApiException')
         }
       })
     })
@@ -199,9 +250,8 @@ describe('kubernetes/api.ts', () => {
           await api.getPodsForJob({ namespace: 'test-ns', name: 'test-job' })
           assert.fail('Expected an error')
         } catch (err) {
-          assert.ok(err instanceof HttpError)
-          assert.deepStrictEqual(Object.keys(err), ['response', 'body', 'statusCode', 'name'])
-          assert.strictEqual(err.response, undefined)
+          assertNoSensitiveData(err)
+          assert.ok(err instanceof ApiException, 'Expected an ApiException')
         }
       })
     })
@@ -228,9 +278,8 @@ describe('kubernetes/api.ts', () => {
           await api.getPodLogs({ namespace: 'test-ns', name: 'test-pod' })
           assert.fail('Expected an error')
         } catch (err) {
-          assert.ok(err instanceof HttpError)
-          assert.deepStrictEqual(Object.keys(err), ['response', 'body', 'statusCode', 'name'])
-          assert.strictEqual(err.response, undefined)
+          assertNoSensitiveData(err)
+          assert.ok(err instanceof ApiException, 'Expected an ApiException')
         }
       })
     })
@@ -456,9 +505,8 @@ describe('kubernetes/api.ts', () => {
           })
           assert.fail('Expected an error')
         } catch (err) {
-          assert.ok(err instanceof HttpError)
-          assert.deepStrictEqual(Object.keys(err), ['response', 'body', 'statusCode', 'name'])
-          assert.strictEqual(err.response, undefined)
+          assertNoSensitiveData(err)
+          assert.ok(err instanceof ApiException, 'Expected an ApiException')
         }
       })
     })

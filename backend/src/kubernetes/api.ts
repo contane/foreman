@@ -1,40 +1,26 @@
-import k8s, { HttpError, type V1CronJob, type V1EnvVar, type V1Job, type V1Pod } from '@kubernetes/client-node'
+import { ApiException, BatchV1Api, CoreV1Api, type KubeConfig, type V1CronJob, type V1EnvVar, type V1Job, type V1Pod } from '@kubernetes/client-node'
 import assert from 'node:assert'
 import type { BaseLogger } from 'pino'
 
 export const DEFAULT_NAMESPACE = 'default'
 
 export interface KubernetesApiOptions {
-  kubeConfig: k8s.KubeConfig
+  kubeConfig: KubeConfig
 }
 
 export class KubernetesApi {
   constructor (
     private readonly log: BaseLogger,
-    private readonly coreApi: k8s.CoreV1Api,
-    private readonly batchApi: k8s.BatchV1Api
+    private readonly coreApi: CoreV1Api,
+    private readonly batchApi: BatchV1Api
   ) {
   }
 
   static async create (log: BaseLogger, options: KubernetesApiOptions): Promise<KubernetesApi> {
     const kubeConfig = options.kubeConfig
-    const coreApi = kubeConfig.makeApiClient(k8s.CoreV1Api)
-    const batchApi = kubeConfig.makeApiClient(k8s.BatchV1Api)
+    const coreApi = kubeConfig.makeApiClient(CoreV1Api)
+    const batchApi = kubeConfig.makeApiClient(BatchV1Api)
     return new KubernetesApi(log, coreApi, batchApi)
-  }
-
-  private async request <T> (fn: () => Promise<T>): Promise<T> {
-    // The Kubernetes client throws HTTP errors that contain the request and response headers.
-    // This is a security risk if the error is logged, so we catch and rethrow the error without these objects.
-    try {
-      return await fn()
-    } catch (err) {
-      if (err instanceof HttpError) {
-        // Force TypeScript to cause an error if the response property is missing
-        ((err satisfies { response: object }) as any).response = undefined
-      }
-      throw err
-    }
   }
 
   async getCronJob (options: {
@@ -42,31 +28,29 @@ export class KubernetesApi {
     name: string
   }): Promise<V1CronJob | undefined> {
     this.log.debug({ options }, 'k8s_getCronJob')
-    return await this.request(async () => {
-      try {
-        const result = await this.batchApi.readNamespacedCronJob(options.name, options.namespace)
-        return result.body
-      } catch (err) {
-        if (err instanceof HttpError && err.statusCode === 404) {
-          this.log.warn({ options }, 'k8s_getCronJob: not found')
-          return undefined
-        }
-        throw err
+    try {
+      return await this.batchApi.readNamespacedCronJob({
+        namespace: options.namespace,
+        name: options.name
+      })
+    } catch (err) {
+      if (err instanceof ApiException && err.code === 404) {
+        this.log.warn({ options }, 'k8s_getCronJob: not found')
+        return undefined
       }
-    })
+      throw err
+    }
   }
 
   async getJobs (options: {
     namespace: string
   }): Promise<V1Job[] | undefined> {
     this.log.debug({ options }, 'k8s_getJobs')
-    const result = await this.request(async () => {
-      return await this.batchApi.listNamespacedJob(options.namespace)
-    })
-    return result.body.items.map((item) => ({
+    const result = await this.batchApi.listNamespacedJob(options)
+    return result.items.map((item) => ({
       ...item,
-      kind: result.body.kind?.replace(/List$/, ''),
-      apiVersion: result.body.apiVersion
+      kind: result.kind?.replace(/List$/, ''),
+      apiVersion: result.apiVersion
     }))
   }
 
@@ -76,13 +60,14 @@ export class KubernetesApi {
   }): Promise<V1Pod[]> {
     this.log.debug({ options }, 'k8s_getPodsForJob')
     const labelSelector = `job-name=${options.name}`
-    const result = await this.request(async () => {
-      return await this.coreApi.listNamespacedPod(options.namespace, undefined, undefined, undefined, undefined, labelSelector)
+    const result = await this.coreApi.listNamespacedPod({
+      namespace: options.namespace,
+      labelSelector
     })
-    return result.body.items.map((item) => ({
+    return result.items.map((item) => ({
       ...item,
-      kind: result.body.kind?.replace(/List$/, ''),
-      apiVersion: result.body.apiVersion
+      kind: result.kind?.replace(/List$/, ''),
+      apiVersion: result.apiVersion
     }))
   }
 
@@ -91,10 +76,10 @@ export class KubernetesApi {
     name: string
   }): Promise<string> {
     this.log.debug({ options }, 'k8s_getPodLogs')
-    const result = await this.request(async () => {
-      return await this.coreApi.readNamespacedPodLog(options.name, options.namespace)
+    return await this.coreApi.readNamespacedPodLog({
+      namespace: options.namespace,
+      name: options.name
     })
-    return result.body
   }
 
   async triggerCronJob (options: {
@@ -123,14 +108,14 @@ export class KubernetesApi {
     jobBody = applyEnvToJobContainers(jobBody, options.env)
     // Cleanup job after 1 hour
     jobBody = applyTtl(jobBody, 60 * 60)
-    const result = await this.request(async () => {
-      return await this.batchApi.createNamespacedJob(namespace, jobBody)
+    return await this.batchApi.createNamespacedJob({
+      namespace,
+      body: jobBody
     })
-    return result.body
   }
 }
 
-function applyMetadataAnnotations (jobBody: k8s.V1Job, annotations: Record<string, string>): k8s.V1Job {
+function applyMetadataAnnotations (jobBody: V1Job, annotations: Record<string, string>): V1Job {
   return {
     ...jobBody,
     metadata: {
@@ -143,7 +128,7 @@ function applyMetadataAnnotations (jobBody: k8s.V1Job, annotations: Record<strin
   }
 }
 
-function applyMetadataLabels (jobBody: k8s.V1Job, labels: Record<string, string>): k8s.V1Job {
+function applyMetadataLabels (jobBody: V1Job, labels: Record<string, string>): V1Job {
   return {
     ...jobBody,
     metadata: {
@@ -156,7 +141,7 @@ function applyMetadataLabels (jobBody: k8s.V1Job, labels: Record<string, string>
   }
 }
 
-function applyMetadataName (jobBody: k8s.V1Job, name: string): k8s.V1Job {
+function applyMetadataName (jobBody: V1Job, name: string): V1Job {
   return {
     ...jobBody,
     metadata: {
@@ -166,7 +151,7 @@ function applyMetadataName (jobBody: k8s.V1Job, name: string): k8s.V1Job {
   }
 }
 
-function applyEnvToJobContainers (jobBody: k8s.V1Job, env: Record<string, string>): k8s.V1Job {
+function applyEnvToJobContainers (jobBody: V1Job, env: Record<string, string>): V1Job {
   if (jobBody.spec?.template.spec?.containers == null) {
     // No containers to apply env to
     return jobBody
@@ -189,7 +174,7 @@ function applyEnvToJobContainers (jobBody: k8s.V1Job, env: Record<string, string
   }
 }
 
-function applyTtl (jobBody: k8s.V1Job, ttlSecondsAfterFinished: number): k8s.V1Job {
+function applyTtl (jobBody: V1Job, ttlSecondsAfterFinished: number): V1Job {
   if (jobBody.spec == null) {
     return jobBody
   }
