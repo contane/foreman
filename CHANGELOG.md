@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/contane/foreman/compare/v0.5.0...v0.5.1) (2024-12-24)
+
+
+### Bug Fixes
+
+* Ensure proper OIDC redirect_uri is used ([#192](https://github.com/contane/foreman/issues/192)) ([894b4db](https://github.com/contane/foreman/commit/894b4db2834206be931da86cac490008cc25a43c))
+
 ## [0.5.0](https://github.com/contane/foreman/compare/v0.4.3...v0.5.0) (2024-12-24)
 
 
