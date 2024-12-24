@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.5.0](https://github.com/contane/foreman/compare/v0.4.3...v0.5.0) (2024-12-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* Foreman now requires the OIDC issuer to use HTTPS. Plain HTTP is no longer supported for OpenID Connect authentication.
+* Require Node.js v22.12.0 or later ([#189](https://github.com/contane/foreman/issues/189))
+* Kubernetes client v1 requires HTTPS for connecting to the Kubernetes API server. While this should not cause any problems in practice, as Kubernetes API servers are typically exposed over HTTPS, it would still break non-standard HTTP-only setups.
+
+### Features
+
+* Optimize Docker image, build for amd64+arm64 ([#173](https://github.com/contane/foreman/issues/173)) ([8d35b6d](https://github.com/contane/foreman/commit/8d35b6ddb60301248990c0d5ff5e114d3b390079))
+* Update Kubernetes client to v1 ([#188](https://github.com/contane/foreman/issues/188)) ([2c09c9e](https://github.com/contane/foreman/commit/2c09c9e2fb79cc84084d18552fb454e68d21a3eb))
+* Update openid-client to v6, require HTTPS for issuer ([#190](https://github.com/contane/foreman/issues/190)) ([05658f4](https://github.com/contane/foreman/commit/05658f478b88a578617b80bbc4b523791d5da305))
+
+
+### Bug Fixes
+
+* **deps:** update dependencies (non-major) ([#178](https://github.com/contane/foreman/issues/178)) ([5542721](https://github.com/contane/foreman/commit/5542721f64db99a0fa925b65999bc67cef096f41))
+* **deps:** update dependencies (non-major) ([#185](https://github.com/contane/foreman/issues/185)) ([e7c156a](https://github.com/contane/foreman/commit/e7c156af286e1546e1da213617dfd87bb0353d2e))
+* **deps:** update dependency fastify to v5.2.0 ([#181](https://github.com/contane/foreman/issues/181)) ([2aa081d](https://github.com/contane/foreman/commit/2aa081d45845c8e41d8222f19a7d3c5169a845bb))
+* **deps:** update node.js to v22 ([#158](https://github.com/contane/foreman/issues/158)) ([2b070f1](https://github.com/contane/foreman/commit/2b070f1a31998cba34ecf72b12ae486ad6ea3618))
+* **deps:** update react monorepo to v19 (major) ([#179](https://github.com/contane/foreman/issues/179)) ([5c786d1](https://github.com/contane/foreman/commit/5c786d1c63b371fe90aad3e7008e0b32b4ac57d6))
+
+
+### Miscellaneous Chores
+
+* Require Node.js v22.12.0 or later ([#189](https://github.com/contane/foreman/issues/189)) ([af7ef37](https://github.com/contane/foreman/commit/af7ef37514078d7c45cd238972b20126441ffbfa))
+
 ## [0.4.3](https://github.com/contane/foreman/compare/v0.4.2...v0.4.3) (2024-11-30)
 
 
