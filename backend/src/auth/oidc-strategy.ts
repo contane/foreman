@@ -59,7 +59,7 @@ export async function makeOidcStrategy (options: OidcOptions): Promise<OpenIdStr
     }
   }
 
-  return new OpenIdStrategy({
+  const strategy = new OpenIdStrategy({
     name: AuthStrategy.OIDC,
     config,
     callbackURL: options.redirectUri,
@@ -69,4 +69,18 @@ export async function makeOidcStrategy (options: OidcOptions): Promise<OpenIdStr
       .then((user: User) => done(null, user))
       .catch((err: unknown) => done(err))
   })
+
+  // openid-client for some reason ignores the fact that we provided a full callback URL and instead manipulates it
+  // based on the request URL, which may be completely wrong in case of a reverse proxy. This is a workaround.
+  // https://github.com/panva/openid-client/issues/733
+  // https://github.com/panva/openid-client/discussions/741
+  strategy.currentUrl = function (request) {
+    const callbackUrl = new URL(options.redirectUri)
+    const currentUrl = OpenIdStrategy.prototype.currentUrl.call(this, request)
+    currentUrl.protocol = callbackUrl.protocol
+    currentUrl.host = callbackUrl.host
+    return currentUrl
+  }
+
+  return strategy
 }
