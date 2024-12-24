@@ -12,6 +12,7 @@ ability to trigger custom jobs, speeding up the dependency upgrade cycle in the 
 - GitHub: https://github.com/contane/foreman
 - Docker Hub: https://hub.docker.com/r/contane/foreman
 - Helm chart: https://github.com/contane/charts/tree/main/charts/foreman
+- Artifact Hub: https://artifacthub.io/packages/helm/contane-github/foreman
 
 ## Installation
 
