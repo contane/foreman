@@ -1,4 +1,5 @@
-import { custom, Issuer, Strategy as OpenIdStrategy, TokenSet, type UserinfoResponse } from 'openid-client'
+import * as openid from 'openid-client'
+import { Strategy as OpenIdStrategy } from 'openid-client/passport'
 import { AuthStrategy, type User } from './common.js'
 import type { AuthenticateOptions } from '@fastify/passport/dist/AuthenticationRoute.js'
 import type { RouteHandlerMethod } from 'fastify'
@@ -6,51 +7,66 @@ import { fastifyPassport } from '../fastifyPassport.js'
 
 export const authenticateOidc = (options?: AuthenticateOptions): RouteHandlerMethod => fastifyPassport.authenticate(AuthStrategy.OIDC, options)
 
-export async function makeOidcStrategy (options: {
+interface OidcOptions {
   issuer: string
   clientId: string
   clientSecret: string
   redirectUri: string
-}): Promise<OpenIdStrategy<User>> {
+
+  /**
+   * @deprecated This option is only provided for testing purposes.
+   */
+  allowInsecureRequests?: boolean
+}
+
+export async function makeOidcStrategy (options: OidcOptions): Promise<OpenIdStrategy> {
   const issuerUrl = options.issuer.includes('.well-known')
-    ? options.issuer
-    : new URL('/.well-known/openid-configuration', options.issuer).toString()
+    ? new URL(options.issuer)
+    : new URL('/.well-known/openid-configuration', options.issuer)
 
-  const issuer = await Issuer.discover(issuerUrl)
-
-  const client = new issuer.Client({
-    client_id: options.clientId,
-    client_secret: options.clientSecret,
-    redirect_uris: [options.redirectUri],
-    response_types: ['code'],
-    token_endpoint_auth_method: 'client_secret_basic'
+  const config = await openid.discovery(issuerUrl, options.clientId, options.clientSecret, undefined, {
+    // eslint-disable-next-line @typescript-eslint/no-deprecated
+    execute: options.allowInsecureRequests === true ? [openid.allowInsecureRequests] : undefined,
+    timeout: 30_000
   })
 
-  // There are some really slow OIDC providers out there.
-  client[custom.http_options] = () => {
-    return { timeout: 30_000 }
-  }
+  type TokenSet = openid.TokenEndpointResponse & openid.TokenEndpointResponseHelpers
 
-  return new OpenIdStrategy({
-    client,
-    params: {
-      scope: 'openid email'
+  const verify = async (tokenset: TokenSet): Promise<User> => {
+    const expiresIn = tokenset.expiresIn()
+    if (expiresIn != null && expiresIn < 1) {
+      throw new Error('Token expired')
     }
-  }, (tokenset: TokenSet, userinfo: UserinfoResponse, done: (err: any, user?: User) => void) => {
-    if (tokenset.expired()) {
-      done(new Error('Token expired'))
-      return
-    }
+
     const claims = tokenset.claims()
-    const username = claims.email ?? userinfo.email
-    if (username == null) {
-      done(new Error('No username or email provided'))
-      return
+    if (claims == null) {
+      throw new Error('No claims provided')
     }
-    done(null, {
+
+    let username = claims.email
+    if (username == null) {
+      const userInfo = await openid.fetchUserInfo(config, tokenset.access_token, claims.sub)
+      username = userInfo.email
+    }
+    if (username == null || typeof username !== 'string') {
+      throw new Error('No username or email provided, or it is not a string')
+    }
+
+    return {
       strategy: AuthStrategy.OIDC,
       username,
       createdAt: Date.now()
-    })
+    }
+  }
+
+  return new OpenIdStrategy({
+    name: AuthStrategy.OIDC,
+    config,
+    callbackURL: options.redirectUri,
+    scope: 'openid email'
+  }, (tokenset: TokenSet, done: (err: any, user?: User) => void) => {
+    verify(tokenset)
+      .then((user: User) => done(null, user))
+      .catch((err: unknown) => done(err))
   })
 }

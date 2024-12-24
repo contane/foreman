@@ -174,7 +174,7 @@ The following configuration must be set in the OIDC provider, assuming Foreman i
 - Redirect URL: `https://foreman.example.com/api/auth/oidc/callback`
 
 It is assumed that your OIDC provider restricts which users can log in to Foreman, as no additional role checks are
-performed by Foreman.
+performed by Foreman. Additionally, the issuer must use HTTPS.
 
 ### GitLab integration
 

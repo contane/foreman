@@ -90,7 +90,7 @@ export const backend = (kubeConfig: KubeConfig, config: BackendConfig): FastifyP
     fastifyPassport.use(AuthStrategy.OIDC, await makeOidcStrategy({
       ...config.auth.oidc,
       redirectUri: new URL(`${app.prefix}/auth/oidc/callback`, config.auth.oidc.publicUrl).toString()
-    }))
+    }) as any)
   }
 
   await app.register(strategiesAuthRoute(enabledAuthStrategies), { prefix: '/auth/strategies' })
