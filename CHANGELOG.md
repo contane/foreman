@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/contane/foreman/compare/v0.5.1...v0.5.2) (2025-01-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency yaml to v2.7.0 ([#196](https://github.com/contane/foreman/issues/196)) ([cce9bd9](https://github.com/contane/foreman/commit/cce9bd910e65f16a843b16e889d2161905607637))
+
 ## [0.5.1](https://github.com/contane/foreman/compare/v0.5.0...v0.5.1) (2024-12-24)
 
 
