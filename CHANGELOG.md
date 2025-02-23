@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.2](https://github.com/contane/foreman/compare/v0.5.1...v0.5.2) (2025-02-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependencies (non-major) ([#199](https://github.com/contane/foreman/issues/199)) ([391fe1e](https://github.com/contane/foreman/commit/391fe1efb74311a1bb7631b687e11c1a611ec5c8))
+* **deps:** update dependencies (non-major) ([#207](https://github.com/contane/foreman/issues/207)) ([36d9944](https://github.com/contane/foreman/commit/36d994416431947128cb4e413e447e8dbb76e866))
+* **deps:** update dependencies (non-major) ([#211](https://github.com/contane/foreman/issues/211)) ([c9d4ad5](https://github.com/contane/foreman/commit/c9d4ad5c79a907eac50369c33f730cbf9a70c74e))
+* **deps:** update dependency yaml to v2.7.0 ([#196](https://github.com/contane/foreman/issues/196)) ([cce9bd9](https://github.com/contane/foreman/commit/cce9bd910e65f16a843b16e889d2161905607637))
+* **deps:** update node.js to v22.14.0 ([#210](https://github.com/contane/foreman/issues/210)) ([3501d83](https://github.com/contane/foreman/commit/3501d839ce00cf5701b99294a52ae2132301e2f3))
+
 ## [0.5.1](https://github.com/contane/foreman/compare/v0.5.0...v0.5.1) (2024-12-24)
 
 
