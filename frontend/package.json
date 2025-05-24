@@ -23,7 +23,7 @@
     "@fortawesome/fontawesome-svg-core": "6.7.2",
     "@fortawesome/free-solid-svg-icons": "6.7.2",
     "@fortawesome/react-fontawesome": "0.2.2",
-    "@headlessui/react": "2.2.3",
+    "@headlessui/react": "2.2.4",
     "@uidotdev/usehooks": "2.4.1",
     "clsx": "2.1.1",
     "cronstrue": "2.61.0",
