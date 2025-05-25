@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.5.2](https://github.com/contane/foreman/compare/v0.5.1...v0.5.2) (2025-05-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependencies (non-major) ([#199](https://github.com/contane/foreman/issues/199)) ([391fe1e](https://github.com/contane/foreman/commit/391fe1efb74311a1bb7631b687e11c1a611ec5c8))
+* **deps:** update dependencies (non-major) ([#207](https://github.com/contane/foreman/issues/207)) ([36d9944](https://github.com/contane/foreman/commit/36d994416431947128cb4e413e447e8dbb76e866))
+* **deps:** update dependencies (non-major) ([#211](https://github.com/contane/foreman/issues/211)) ([c9d4ad5](https://github.com/contane/foreman/commit/c9d4ad5c79a907eac50369c33f730cbf9a70c74e))
+* **deps:** update dependencies (non-major) ([#213](https://github.com/contane/foreman/issues/213)) ([c5cc7c9](https://github.com/contane/foreman/commit/c5cc7c9840f87cd1d9f29728b79823d25ac185e1))
+* **deps:** update dependencies (non-major) ([#225](https://github.com/contane/foreman/issues/225)) ([cc5b318](https://github.com/contane/foreman/commit/cc5b318286a79711f155b5ba40e676cd784d6de3))
+* **deps:** update dependencies (non-major) ([#228](https://github.com/contane/foreman/issues/228)) ([05d055e](https://github.com/contane/foreman/commit/05d055e9fd69a95b37029b86fd1d7290aefbcc46))
+* **deps:** update dependency fastify to v5.3.2 [security] ([#218](https://github.com/contane/foreman/issues/218)) ([51c635f](https://github.com/contane/foreman/commit/51c635f2f656eecb3b88add31f1a4f851b4f6866))
+* **deps:** update dependency secure-json-parse to v4 ([#215](https://github.com/contane/foreman/issues/215)) ([d901152](https://github.com/contane/foreman/commit/d9011527e8e108bcd4604875ab068fdb402fd0ef))
+* **deps:** update dependency yaml to v2.7.0 ([#196](https://github.com/contane/foreman/issues/196)) ([cce9bd9](https://github.com/contane/foreman/commit/cce9bd910e65f16a843b16e889d2161905607637))
+* **deps:** update node.js to v22.14.0 ([#210](https://github.com/contane/foreman/issues/210)) ([3501d83](https://github.com/contane/foreman/commit/3501d839ce00cf5701b99294a52ae2132301e2f3))
+* **deps:** update node.js to v22.15.1 ([#224](https://github.com/contane/foreman/issues/224)) ([d538840](https://github.com/contane/foreman/commit/d538840548f3aec3d9c579eca685d0c6118a1704))
+* **deps:** update node.js to v22.16.0 ([#230](https://github.com/contane/foreman/issues/230)) ([3c17a33](https://github.com/contane/foreman/commit/3c17a3339a31977ae5303022b28da3417784e0b9))
+
 ## [0.5.1](https://github.com/contane/foreman/compare/v0.5.0...v0.5.1) (2024-12-24)
 
 
