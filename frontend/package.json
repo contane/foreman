@@ -9,13 +9,13 @@
     "lint-fix": "tsc --noEmit -p tsconfig.lint.json && eslint --fix ."
   },
   "devDependencies": {
-    "@types/luxon": "3.6.2",
-    "@types/react": "19.1.5",
-    "@types/react-dom": "19.1.5",
-    "@vitejs/plugin-react": "4.5.0",
+    "@types/luxon": "3.7.1",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "@vitejs/plugin-react": "4.7.0",
     "autoprefixer": "10.4.21",
-    "postcss": "8.5.3",
-    "tailwindcss": "3.4.17",
+    "postcss": "8.5.6",
+    "tailwindcss": "3.4.18",
     "vite": "6.3.6",
     "vite-plugin-favicons-inject": "2.2.0"
   },
