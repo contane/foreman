@@ -65,6 +65,6 @@
     "yaml": "2.8.0"
   },
   "overrides": {
-    "sodium-native": "4.2.0"
+    "sodium-native": "5.0.9"
   }
 }
