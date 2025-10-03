@@ -1,5 +1,5 @@
 # -- compilation --
-FROM node:22.16.0-alpine AS build
+FROM node:22.20.0-alpine AS build
 WORKDIR /app
 
 # install dependencies
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # -- execution --
-FROM node:22.16.0-alpine
+FROM node:22.20.0-alpine
 WORKDIR /app
 
 RUN apk add --no-cache tini
