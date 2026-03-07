@@ -1,24 +1,24 @@
-import path from 'node:path'
-import { type Config, readConfigDirectory } from './config.js'
-import { StructError } from 'superstruct'
-import { pino } from 'pino'
-import { startServer } from './server.js'
-import { getPort } from './environment.js'
 import { KubeConfig } from '@kubernetes/client-node'
+import path from 'node:path'
+import { pino, stdSerializers, stdTimeFunctions } from 'pino'
+import { StructError } from 'superstruct'
+import { type Config, readConfigDirectory } from './config.js'
+import { getPort } from './environment.js'
 import { loadKubeConfig } from './kube-config.js'
+import { startServer } from './server.js'
 
 const log = pino({
   level: 'info',
   // do not log pid and hostname
   base: undefined,
   // use ISO strings for timestamps instead of milliseconds
-  timestamp: pino.stdTimeFunctions.isoTime,
+  timestamp: stdTimeFunctions.isoTime,
   // use string levels (e.g., "info") instead of level numbers (e.g., 30)
   formatters: {
     level: (label) => ({ level: label }),
     log: (object) => {
       if (object instanceof Error) {
-        return pino.stdSerializers.errWithCause(object)
+        return stdSerializers.errWithCause(object)
       }
       return object
     }

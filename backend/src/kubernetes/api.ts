@@ -1,6 +1,6 @@
 import { ApiException, BatchV1Api, CoreV1Api, type KubeConfig, type V1CronJob, type V1EnvVar, type V1Job, type V1Pod } from '@kubernetes/client-node'
+import type { FastifyBaseLogger } from 'fastify'
 import assert from 'node:assert'
-import type { BaseLogger } from 'pino'
 
 export const DEFAULT_NAMESPACE = 'default'
 
@@ -10,13 +10,13 @@ export interface KubernetesApiOptions {
 
 export class KubernetesApi {
   constructor (
-    private readonly log: BaseLogger,
+    private readonly log: FastifyBaseLogger,
     private readonly coreApi: CoreV1Api,
     private readonly batchApi: BatchV1Api
   ) {
   }
 
-  static async create (log: BaseLogger, options: KubernetesApiOptions): Promise<KubernetesApi> {
+  static async create (log: FastifyBaseLogger, options: KubernetesApiOptions): Promise<KubernetesApi> {
     const kubeConfig = options.kubeConfig
     const coreApi = kubeConfig.makeApiClient(CoreV1Api)
     const batchApi = kubeConfig.makeApiClient(BatchV1Api)

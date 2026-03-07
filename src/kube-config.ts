@@ -4,7 +4,7 @@ import type { BaseLogger } from 'pino'
 
 export function loadKubeConfig (log: BaseLogger, config: Config): KubeConfig {
   const from = config.kubeConfig.source
-  log.info('kubeconfig_load', { from })
+  log.info({ from }, 'kubeconfig_load')
 
   const kubeConfig = kubeConfigFromSource(from)
   validateKubeConfig(kubeConfig)
