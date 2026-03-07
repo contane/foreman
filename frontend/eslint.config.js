@@ -3,8 +3,9 @@ import pluginReact from 'eslint-plugin-react'
 import pluginReactHooks from 'eslint-plugin-react-hooks'
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 import { fixupPluginRules } from '@eslint/compat'
+import { defineConfig } from 'eslint/config'
 
-export default [
+export default defineConfig([
   ...eslintConfig,
   pluginReact.configs.flat.recommended,
   pluginReact.configs.flat['jsx-runtime'],
@@ -54,4 +55,4 @@ export default [
       'react/jsx-equals-spacing': ['error', 'never']
     }
   }
-]
+])

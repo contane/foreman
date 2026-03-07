@@ -30,7 +30,7 @@ export async function prettifyLogs (logs: string): Promise<string> {
   return chunks.join('')
 }
 
-function * chunked (str: string, size = 4096): Iterable<string> {
+function* chunked (str: string, size = 4096): Iterable<string> {
   for (let i = 0; i < str.length; i += size) {
     yield str.slice(i, i + size)
   }

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-spread */
+
 import { ApiException, BatchV1Api, CoreV1Api, type KubeConfig, type V1CronJob, type V1EnvVar, type V1Job, type V1Pod } from '@kubernetes/client-node'
 import type { FastifyBaseLogger } from 'fastify'
 import assert from 'node:assert'

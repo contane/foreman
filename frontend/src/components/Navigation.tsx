@@ -43,8 +43,8 @@ const NavigationJobsSection: FunctionComponent<{
 
       {!loading
         ? jobs?.slice(0, JOB_HISTORY_LIMIT).map((job) => (
-          <JobNavigationItem key={`${job.namespace}/${job.name}`} name={job.name} namespace={job.namespace} status={job.status} startTime={job.startTime} manual={job.manual} onNavigate={props.onNavigate} />
-        ))
+            <JobNavigationItem key={`${job.namespace}/${job.name}`} name={job.name} namespace={job.namespace} status={job.status} startTime={job.startTime} manual={job.manual} onNavigate={props.onNavigate} />
+          ))
         : [...Array(JOB_HISTORY_LIMIT)].map((_, i) => (
             <JobNavigationItem key={i} name={undefined} namespace={undefined} status={undefined} startTime={undefined} manual={false} />
           ))

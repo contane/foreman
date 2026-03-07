@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-spread */
+
 import { pino } from 'pino'
 import { KubernetesApi } from '../../src/kubernetes/api.js'
 import { ApiException, KubeConfig, V1CronJob } from '@kubernetes/client-node'

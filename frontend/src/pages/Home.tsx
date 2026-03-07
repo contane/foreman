@@ -71,8 +71,8 @@ const JobsSection: FunctionComponent = () => {
       </Heading>
       {!loading
         ? jobs?.slice(0, JOB_HISTORY_LIMIT).map((job) => (
-          <JobPanel key={`${job.namespace}/${job.name}`} name={job.name} namespace={job.namespace} status={job.status} startTime={job.startTime} manual={job.manual} />
-        ))
+            <JobPanel key={`${job.namespace}/${job.name}`} name={job.name} namespace={job.namespace} status={job.status} startTime={job.startTime} manual={job.manual} />
+          ))
         : [...Array(JOB_HISTORY_LIMIT)].map((_, i) => (
             <JobPanel key={i} name={undefined} namespace={undefined} status={undefined} startTime={undefined} manual={false} />
           ))

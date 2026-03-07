@@ -59,7 +59,7 @@ export function extractProgress (logs: string, options: {
   return Array.from(repositories.values())
 }
 
-function * lines (str: string): Generator<string> {
+function* lines (str: string): Generator<string> {
   let lineFrom = 0
   while (lineFrom < str.length) {
     let lineTo = str.indexOf('\n', lineFrom)
