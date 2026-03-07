@@ -1,5 +1,7 @@
+import dotenv from 'dotenv'
+
 // load the .env file
-import 'dotenv/config'
+dotenv.config({ quiet: true })
 
 function getEnvOrDefault (name: string, defaultValue: string): string {
   const value = process.env[name]
