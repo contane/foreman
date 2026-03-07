@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@custom-variant hocus {
+  &:hover,
+  &:focus-visible {
+    @slot;
+  }
+}
 
 body {
   position: relative;
