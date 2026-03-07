@@ -1,5 +1,7 @@
+ARG BUILDPLATFORM
+
 # -- compilation --
-FROM node:22.22.1-alpine AS build
+FROM --platform=$BUILDPLATFORM node:22.22.1-alpine AS build
 WORKDIR /app
 
 # install dependencies
