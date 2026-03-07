@@ -31,7 +31,7 @@ const httpUrlString = refine(nonempty(string()), 'url', (value) => {
 })
 
 export const timeStringToMs = refine(
-  coerce(integer(), string(), (value) => ms(value)),
+  coerce(integer(), string(), (value) => ms(value as ms.StringValue)),
   'positive integer',
   (value) => Number.isSafeInteger(value) && value > 0
 )
