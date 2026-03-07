@@ -1,14 +1,14 @@
-import { FormEvent, FunctionComponent, PropsWithChildren, useCallback, useEffect, useState } from 'react'
+import { FunctionComponent, PropsWithChildren, useCallback, useEffect, useState, type SubmitEvent } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { api } from '../api/api.js'
+import { useApiDispatch } from '../api/dispatch.js'
+import { useApiSubscription } from '../api/subscription.js'
+import { Button } from '../components/Button.js'
+import { Card } from '../components/Card.js'
+import { ErrorMessage } from '../components/ErrorMessage.js'
+import { Heading } from '../components/Heading.js'
 import { Label } from '../components/Label.js'
 import { TextInput } from '../components/TextInput.js'
-import { Button } from '../components/Button.js'
-import { useApiDispatch } from '../api/dispatch.js'
-import { api } from '../api/api.js'
-import { Heading } from '../components/Heading.js'
-import { useSearchParams } from 'react-router-dom'
-import { useApiSubscription } from '../api/subscription.js'
-import { ErrorMessage } from '../components/ErrorMessage.js'
-import { Card } from '../components/Card.js'
 
 export const Login: FunctionComponent = () => {
   const [searchParams] = useSearchParams()
@@ -72,7 +72,7 @@ const LocalLogin: FunctionComponent<{
 
   const { dispatch: dispatchLocalLogin, data: localLoginResult, error: loginError, inProgress } = useApiDispatch(api.localLogin)
 
-  const onSubmit = useCallback((event: FormEvent): void => {
+  const onSubmit = useCallback((event: SubmitEvent): void => {
     event.preventDefault()
     dispatchLocalLogin({
       username: username.trim(),
