@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.3](https://github.com/contane/foreman/compare/v0.5.2...v0.5.3) (2026-03-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependencies (non-major) ([#231](https://github.com/contane/foreman/issues/231)) ([fe4472e](https://github.com/contane/foreman/commit/fe4472ec9c79d10b3ec798e811454120f98ca825))
+* **deps:** update dependency @fastify/static to v9 ([#258](https://github.com/contane/foreman/issues/258)) ([67e99b5](https://github.com/contane/foreman/commit/67e99b538d1ead0df2f1062cfb95d631ed7f9186))
+* **deps:** update dependency cron-parser to v5 ([#209](https://github.com/contane/foreman/issues/209)) ([c612bc7](https://github.com/contane/foreman/commit/c612bc72ddf8ee8a256c2b276ec12a2810ee0c7c))
+* **deps:** update dependency cronstrue to v3 ([#261](https://github.com/contane/foreman/issues/261)) ([0255e92](https://github.com/contane/foreman/commit/0255e92afca2f377d6b282cd90a9f9c08e568cd4))
+* **deps:** update dependency dotenv to v17 ([#236](https://github.com/contane/foreman/issues/236)) ([ac17f1c](https://github.com/contane/foreman/commit/ac17f1cb1f36084e670c257560d2d9b461f31a13))
+* **deps:** update dependency fastify to v5.7.3 [security] ([#244](https://github.com/contane/foreman/issues/244)) ([72fd11c](https://github.com/contane/foreman/commit/72fd11c8cae5ecff08df9a5ba86bffd772a66822))
+* **deps:** update dependency fastify to v5.8.1 [security] ([#251](https://github.com/contane/foreman/issues/251)) ([8121ea8](https://github.com/contane/foreman/commit/8121ea817aa663fdcac761edde56a44447fd0a87))
+* **deps:** update dependency pino to v10 ([#259](https://github.com/contane/foreman/issues/259)) ([e07bf56](https://github.com/contane/foreman/commit/e07bf566706048e5f32291f1d94010a913f15053))
+* **deps:** update font awesome (major) ([#262](https://github.com/contane/foreman/issues/262)) ([7fabb1e](https://github.com/contane/foreman/commit/7fabb1e955118083e19ccf7817593551f862e2b9))
+* **deps:** update node.js to v22.22.1 ([#243](https://github.com/contane/foreman/issues/243)) ([6a1ee42](https://github.com/contane/foreman/commit/6a1ee42fa4d4aeef1049f2a8dbfc3cc939577e65))
+
 ## [0.5.2](https://github.com/contane/foreman/compare/v0.5.1...v0.5.2) (2025-05-25)
 
 
