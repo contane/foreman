@@ -37,15 +37,15 @@
     "@meyfa/eslint-config": "8.0.1",
     "@types/mocha": "10.0.10",
     "@types/ms": "0.7.34",
-    "@types/node": "22.15.21",
+    "@types/node": "22.19.15",
     "@types/passport-local": "1.0.38",
-    "eslint": "9.27.0",
+    "eslint": "9.39.4",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "5.2.0",
-    "mocha": "11.5.0",
-    "tsx": "4.19.4",
-    "typescript": "5.8.3"
+    "mocha": "11.7.5",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
   },
   "dependencies": {
     "@fastify/passport": "3.0.2",
