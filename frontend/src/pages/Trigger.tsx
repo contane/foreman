@@ -1,14 +1,14 @@
-import { FormEvent, FunctionComponent, useCallback, useEffect, useState } from 'react'
+import { FunctionComponent, useCallback, useEffect, useState, type SubmitEvent } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useApiDispatch } from '../api/dispatch.js'
 import { api, TriggerJobOptions } from '../api/api.js'
+import { useApiDispatch } from '../api/dispatch.js'
+import { Button } from '../components/Button.js'
+import { Card } from '../components/Card.js'
 import { Heading } from '../components/Heading.js'
+import { InputInfo } from '../components/InputInfo.js'
 import { Label } from '../components/Label.js'
 import { TextInput } from '../components/TextInput.js'
-import { InputInfo } from '../components/InputInfo.js'
-import { Button } from '../components/Button.js'
 import { ToggleSwitch } from '../components/ToggleSwitch.js'
-import { Card } from '../components/Card.js'
 
 export const Trigger: FunctionComponent = () => {
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ export const Trigger: FunctionComponent = () => {
 
   const { dispatch: dispatchTriggerJob, data: jobData, inProgress } = useApiDispatch(api.triggerJob)
 
-  const onTrigger = useCallback((event: FormEvent): void => {
+  const onTrigger = useCallback((event: SubmitEvent): void => {
     event.preventDefault()
     const options: TriggerJobOptions = {
       debugLogging
