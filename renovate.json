@@ -25,6 +25,11 @@
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "dependencies (non-major)",
       "groupSlug": "dependencies-non-major"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchDepTypes": ["action"],
+      "groupName": "actions"
     }
   ]
 }
