@@ -1,4 +1,4 @@
-import type { RouteHandlerMethod } from 'fastify'
+import type { preValidationHookHandler } from 'fastify'
 import { fastifyPassport } from '../fastifyPassport.js'
 
 export enum AuthStrategy {
@@ -7,7 +7,7 @@ export enum AuthStrategy {
 }
 
 // handled by @fastify/secure-session
-export const authenticateSession = (): RouteHandlerMethod => fastifyPassport.authenticate('session')
+export const authenticateSession = (): preValidationHookHandler => fastifyPassport.authenticate('session')
 
 export interface User {
   /**

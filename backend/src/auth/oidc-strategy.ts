@@ -2,10 +2,10 @@ import * as openid from 'openid-client'
 import { Strategy as OpenIdStrategy } from 'openid-client/passport'
 import { AuthStrategy, type User } from './common.js'
 import type { AuthenticateOptions } from '@fastify/passport/dist/AuthenticationRoute.js'
-import type { RouteHandlerMethod } from 'fastify'
+import type { preValidationHookHandler } from 'fastify'
 import { fastifyPassport } from '../fastifyPassport.js'
 
-export const authenticateOidc = (options?: AuthenticateOptions): RouteHandlerMethod => fastifyPassport.authenticate(AuthStrategy.OIDC, options)
+export const authenticateOidc = (options?: AuthenticateOptions): preValidationHookHandler => fastifyPassport.authenticate(AuthStrategy.OIDC, options)
 
 interface OidcOptions {
   issuer: string
