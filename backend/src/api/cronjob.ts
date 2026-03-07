@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify'
 import type { Controllers } from '../controllers.js'
-import cronParser from 'cron-parser'
+import { CronExpressionParser } from 'cron-parser'
 import { forbidden, notFound } from './errors.js'
 import { authenticateSession } from '../auth/common.js'
 
@@ -30,10 +30,10 @@ export const cronjobRoute = ({ cronJobController }: Controllers): FastifyPluginA
 
     let nextScheduleTime: string | undefined
     if (schedule != null) {
-      const interval = cronParser.parseExpression(schedule, {
+      const interval = CronExpressionParser.parse(schedule, {
         tz: typeof cronJob.spec?.timeZone === 'string' ? cronJob.spec.timeZone : undefined
       })
-      nextScheduleTime = interval.next().toISOString()
+      nextScheduleTime = interval.next().toISOString() ?? undefined
     }
 
     return {
