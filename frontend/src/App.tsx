@@ -33,6 +33,7 @@ export const App: FunctionComponent = () => {
   const isMobileNavigation = useMobileNavigation()
   useEffect(() => {
     if (!isMobileNavigation) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAsideExpanded(false)
     }
   }, [isMobileNavigation])
