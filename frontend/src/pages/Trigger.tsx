@@ -20,6 +20,7 @@ export const Trigger: FunctionComponent = () => {
   const initialRepositoryScope = searchParams.get('repositoryScope') ?? ''
   const initialDebugLogging = searchParams.get('debugLogging') === 'true'
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRepositoryScope(initialRepositoryScope)
     setDebugLogging(initialDebugLogging)
   }, [initialRepositoryScope, initialDebugLogging])
