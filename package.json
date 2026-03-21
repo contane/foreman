@@ -62,7 +62,7 @@
     "pino": "10.3.1",
     "react-router-dom": "7.13.1",
     "superstruct": "2.0.2",
-    "yaml": "2.8.2"
+    "yaml": "2.8.3"
   },
   "overrides": {
     "sodium-native": "4.2.0"
