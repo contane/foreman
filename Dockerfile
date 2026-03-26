@@ -1,7 +1,7 @@
 ARG BUILDPLATFORM
 
 # -- compilation --
-FROM --platform=$BUILDPLATFORM node:22.22.1-alpine AS build
+FROM --platform=$BUILDPLATFORM node:22.22.2-alpine AS build
 WORKDIR /app
 
 # install dependencies
@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # -- execution --
-FROM node:22.22.1-alpine
+FROM node:22.22.2-alpine
 WORKDIR /app
 
 RUN apk add --no-cache tini
