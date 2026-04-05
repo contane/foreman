@@ -33,11 +33,11 @@
     "npm": ">=10"
   },
   "devDependencies": {
-    "@eslint/compat": "2.0.3",
+    "@eslint/compat": "2.0.4",
     "@meyfa/eslint-config": "9.0.0",
     "@types/mocha": "10.0.10",
     "@types/ms": "2.1.0",
-    "@types/node": "22.19.15",
+    "@types/node": "22.19.17",
     "@types/passport-local": "1.0.38",
     "eslint": "9.39.4",
     "eslint-plugin-jsx-a11y": "6.10.2",
