@@ -9,13 +9,13 @@
     "lint-fix": "tsc --noEmit -p tsconfig.lint.json && eslint --fix ."
   },
   "devDependencies": {
-    "@tailwindcss/vite": "4.2.2",
+    "@tailwindcss/vite": "4.2.4",
     "@types/luxon": "3.7.1",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.1",
-    "tailwindcss": "4.2.2",
-    "vite": "8.0.5",
+    "tailwindcss": "4.2.4",
+    "vite": "8.0.10",
     "vite-plugin-favicons-inject": "2.2.0"
   },
   "dependencies": {
