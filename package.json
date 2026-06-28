@@ -33,18 +33,18 @@
     "npm": ">=10"
   },
   "devDependencies": {
-    "@eslint/compat": "2.0.4",
+    "@eslint/compat": "2.1.0",
     "@meyfa/eslint-config": "9.0.0",
     "@types/mocha": "10.0.10",
     "@types/ms": "2.1.0",
-    "@types/node": "22.19.17",
+    "@types/node": "22.20.0",
     "@types/passport-local": "1.0.38",
     "eslint": "9.39.4",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",
-    "eslint-plugin-react-hooks": "7.0.1",
-    "mocha": "11.7.5",
-    "tsx": "4.21.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "mocha": "11.7.6",
+    "tsx": "4.22.4",
     "typescript": "5.9.3"
   },
   "dependencies": {
